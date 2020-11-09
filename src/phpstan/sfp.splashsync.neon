@@ -13,7 +13,7 @@
 
 includes:
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
-	- %currentWorkingDirectory%/vendor/phpstan//phpstan-doctrine/extension.neon
+	- %currentWorkingDirectory%/vendor/phpstan/phpstan-doctrine/extension.neon
 # Symfony Mode Disabled Up To NOW !!
 #	- ../../../../../phpstan/phpstan-symfony/extension.neon
 parameters:
