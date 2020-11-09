@@ -18,3 +18,7 @@ echo "----------------------------------------------------"
 
 echo "Composer ==> Outdated Packages"
 composer outdated -D
+
+echo "PhpLoc ==> Packages Statistics"
+wget https://phar.phpunit.de/phploc.phar
+php phploc.phar src
