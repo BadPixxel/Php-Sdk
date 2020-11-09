@@ -29,20 +29,20 @@ matrix:
 # Install & Configure Environnement
 install:
     # Setup Travis
-    - cat  src/travis/configure.sh | bash
+    - cat  travis/configure.sh | bash
     # Composer Build
-    - cat  src/travis/composer.sh | bash
+    - cat  travis/composer.sh | bash
 
 ################################################################################
 # Run Test Script
 script:
     # Execute Grump Travis Testsuite 
-    - cat src/travis/grumphp.sh | bash
+    - cat travis/grumphp.sh | bash
 
 ################################################################################
 # Run After Script
 after_script:
-    - cat  src/travis/after.sh | bash
+    - cat  travis/after.sh | bash
 
 ################################################################################
 # GENERIC CONFIGURATION
