@@ -50,11 +50,9 @@ after_script:
 
 ################################################################################
 # Project language
-language: php
-# Allows use container-based infrastructure
-sudo: false
-#sudo: required
-dist: trusty
+language:   php
+os:         linux
+dist:       trusty
 ################################################################################
 # Start mysql service
 services:
