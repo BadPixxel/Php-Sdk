@@ -15,12 +15,5 @@
 #   Grumphp Generic Config
 #############################################
 imports:
-    - { resource: "./core/parameters.yml" }
-    - { resource: "./core/config.yml" }
-    - { resource: "./tasks/core.yml" }
-    - { resource: "./tasks/lint.yml" }
-    - { resource: "./tasks/phpcs.yml" }
-    - { resource: "./tasks/phpmd.yml" }
-    - { resource: "./tasks/phpcpd.yml" }
-    - { resource: "./tasks/phpcsfixer.yml" }
-    - { resource: "./tasks/phpstan.yml" }
+    - { resource: "./core/*.yml" }
+    - { resource: "./tasks/*.yml" }

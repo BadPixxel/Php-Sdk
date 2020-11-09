@@ -19,8 +19,11 @@
 
   "autoload": {
       "psr-4": {
-          "Badpixxel\\PhpSdk\\": "./src"
+          "BadPixxel\\PhpSdk\\": "./src"
       },
+      "files": [
+        "src/grumphp/src/Configuration/GrumPHPExtension.php"
+      ],
       "exclude-from-classmap": [
           "/tests/"
       ]

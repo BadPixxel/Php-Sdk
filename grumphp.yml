@@ -19,5 +19,5 @@ parameters:
 #############################################        
 # Import Config. from Php Core Module
 imports:
-    - { resource: "./src/grumphp/generic.yml" }
-    - { resource: "./src/grumphp/testsuites/generic.yml" }
+    - "./src/grumphp/generic.yml"
+    - "./src/grumphp/testsuites/generic.yml"
