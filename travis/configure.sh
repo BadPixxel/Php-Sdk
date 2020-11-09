@@ -12,16 +12,15 @@
 #
 ################################################################################
 
-echo -e "\e[104m Config Travis        \e[49m"
+echo "==> Config Travis"
 
-# With PHP < 7.3 => Rollback to Composer 1
-if [[ ${TRAVIS_PHP_VERSION:0:3} < "7.3" ]]; then
-    composer self-update --2;
-fi
+echo "Composer => Force Composer 2";
+composer self-update --2;
 
 # Setup Travis PHP     
 if [ "$TRAVIS_PHP_VERSION" != "hhvm" ];
 then
+  echo "Composer => Force Memory Limit";
   echo "memory_limit = -1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini;
 fi
 
