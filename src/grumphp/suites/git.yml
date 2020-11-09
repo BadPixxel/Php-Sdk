@@ -1,0 +1,20 @@
+
+#############################################
+# Git Hooks Test Suites Configs
+#############################################
+grumphp:
+    testsuites:
+        # Specify the test-suite for the git:commit-msg command:
+        git_commit_msg:
+            tasks:
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint
+        # Specify the test-suite for the git:pre-commit command:
+        git_pre_commit:
+            tasks:
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint

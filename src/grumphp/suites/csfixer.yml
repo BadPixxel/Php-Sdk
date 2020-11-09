@@ -1,0 +1,9 @@
+
+#############################################
+#   Cs Fixer Test Suite
+#############################################
+grumphp:
+    testsuites:
+        csfixer:
+            tasks:
+                - phpcsfixer

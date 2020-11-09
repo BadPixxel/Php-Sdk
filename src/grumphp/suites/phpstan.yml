@@ -1,0 +1,10 @@
+
+#############################################
+# PhpStan Test Suite
+# >>  Static Analyze
+#############################################
+grumphp:
+    testsuites:
+        phpstan:
+            tasks:
+                - phpstan

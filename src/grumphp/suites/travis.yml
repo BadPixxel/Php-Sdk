@@ -1,0 +1,18 @@
+
+#############################################
+# Travis Test Suites
+# >>  Base Test Suite for All PHP Versions
+#############################################
+grumphp:
+    testsuites:
+        travis:
+            tasks:
+                - composer
+                - git_blacklist
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint
+                - phpcs
+                - phpmd
+                - phpcpd

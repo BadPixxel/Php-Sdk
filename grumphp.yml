@@ -20,4 +20,3 @@ parameters:
 # Import Config. from Php Core Module
 imports:
     - "./src/grumphp/generic.yml"
-    - "./src/grumphp/testsuites/generic.yml"
