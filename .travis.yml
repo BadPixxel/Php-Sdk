@@ -54,10 +54,6 @@ language:   php
 os:         linux
 dist:       trusty
 ################################################################################
-# Start mysql service
-services:
-  - mysql
-################################################################################
 # Cache composer packages so "composer install" is faster
 cache:
     directories:
