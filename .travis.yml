@@ -37,7 +37,7 @@ install:
 # Run Test Script
 script:
     # Execute Grump Travis Testsuite 
-    - bash src/travis/grumphp.sh
+    - cat src/travis/grumphp.sh | bash
 
 ################################################################################
 # Run After Script

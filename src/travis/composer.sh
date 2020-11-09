@@ -15,4 +15,4 @@
 echo -e "\e[104m Install Composer Dependencies                        \e[49m"
 
 echo "Composer => Update"
-composer update  --prefer-dist --no-interaction  
+composer update  --prefer-dist --no-interaction  --no-suggest
