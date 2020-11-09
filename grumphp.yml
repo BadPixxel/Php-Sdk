@@ -14,9 +14,9 @@
 #############################################        
 # Override Config. for Php Core Module
 parameters:
-    core_dir:               "./src"
+    core_dir:               "./"
 
 #############################################        
 # Import Config. from Php Core Module
 imports:
-    - "./src/grumphp/generic.yml"
+    - "./grumphp/generic.yml"

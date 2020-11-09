@@ -22,7 +22,7 @@
           "BadPixxel\\PhpSdk\\": "./src"
       },
       "files": [
-        "src/grumphp/src/Configuration/GrumPHPExtension.php"
+          "grumphp/src/Configuration/GrumPHPExtension.php"
       ],
       "exclude-from-classmap": [
           "/tests/"

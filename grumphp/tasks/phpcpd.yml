@@ -5,5 +5,4 @@ grumphp:
     tasks:
         phpcpd:
             triggered_by:     ['php']
-#            triggered_by:     []
             exclude:          "%exclude%"

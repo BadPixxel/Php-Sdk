@@ -17,7 +17,7 @@
 parameters:
 
     #   Path to Grumphp Core Config Dir
-    core_dir:           "vendor/badpixxel/php-sdk/src"
+    core_dir:           "vendor/badpixxel/php-sdk"
 
     #   Testing Mode (badpixxel|splashsync)
     mode:               "badpixxel"
