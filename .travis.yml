@@ -29,9 +29,9 @@ matrix:
 # Install & Configure Environnement
 install:
     # Setup Travis
-    - bash src/travis/configure.sh
+    - cat  src/travis/configure.sh | bash
     # Composer Build
-    - bash src/travis/composer.sh
+    - cat  src/travis/composer.sh | bash
 
 ################################################################################
 # Run Test Script
@@ -42,7 +42,7 @@ script:
 ################################################################################
 # Run After Script
 after_script:
-    - bash src/travis/after.sh
+    - cat  src/travis/after.sh | bash
 
 ################################################################################
 # GENERIC CONFIGURATION
