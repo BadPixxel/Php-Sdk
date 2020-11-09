@@ -1,0 +1,9 @@
+#############################################
+#   Config for Php Code Style
+#############################################
+grumphp:
+    tasks:
+        phpcs:
+            standard:         "PSR2"
+            triggered_by:     ['php']
+            ignore_patterns:  "%exclude%"

@@ -1,0 +1,9 @@
+
+#############################################
+#   Config for Php Cs Fixer
+#############################################
+grumphp:
+    tasks:
+        phpcsfixer:
+            allow_risky:    true
+            config:         "%csfixer-config%"

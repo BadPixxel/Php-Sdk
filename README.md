@@ -1,2 +1,2 @@
 # Php-Sdk
-Dev Kit for Php Packages
+Development Kit for Php Packages

@@ -1,0 +1,43 @@
+
+#############################################
+#   Generic Test Suites Configs
+grumphp:
+    testsuites:
+        # Travis   >>  Base Test Suite for All PHP Versions
+        travis:
+            tasks:
+                - composer
+                - git_blacklist
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint
+                - phpcs
+                - phpmd
+                - phpcpd
+
+        # Cs Fixer >>  Code Syntax & Style Checks
+        csfixer:
+            tasks:
+                - phpcsfixer
+
+        # PhpStan  >>  Static Analyze
+        phpstan:
+            tasks:
+                - phpstan
+
+        # Specify the test-suite for the git:commit-msg command:
+        git_commit_msg:
+            tasks:
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint
+
+        # Specify the test-suite for the git:pre-commit command:
+        git_pre_commit:
+            tasks:
+                - phplint
+                - jsonlint
+                - xmllint
+                - yamllint

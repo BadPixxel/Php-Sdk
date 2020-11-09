@@ -1,0 +1,8 @@
+#############################################
+#   Config for Php Mess Detector
+#############################################
+grumphp:
+    tasks:
+        phpmd:
+            ruleset:        ["%core_dir%/phpmd/phpmd.xml"]
+            exclude:        "%exclude%"

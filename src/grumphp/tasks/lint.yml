@@ -1,0 +1,24 @@
+#############################################
+#   Config for Files Lint Tasks
+#############################################
+
+grumphp:
+    tasks:
+        phplint:
+            exclude:                "%exclude%"
+        jsonlint:
+            detect_key_conflicts:   true
+            ignore_patterns:        "%exclude%"
+        xmllint:
+            ignore_patterns:        "%exclude%"
+        yamllint:
+            parse_custom_tags:      true
+            ignore_patterns:        "%exclude%"
+        git_blacklist:
+            keywords:
+                - "var_dump"
+                - "dump("
+                - "console.log"
+                - "print_r"
+                - "die("
+            triggered_by:           ['php', 'js', 'twig']

@@ -1,0 +1,9 @@
+#############################################
+#   Config for Php Stan Static Analyser
+#############################################
+grumphp:
+    tasks:
+        phpstan:
+            level:              "%stan-level%"
+            configuration:      "%stan-config%"
+            ignore_patterns:    "%stan-exclude%"

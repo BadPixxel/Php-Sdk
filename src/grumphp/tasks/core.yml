@@ -1,0 +1,11 @@
+#############################################
+#   Config for Core Analyze Tasks
+#############################################
+grumphp:
+    tasks:
+        #############################################
+        #   Composer Verifications
+        composer: ~
+        #############################################
+        #   Symfony Security Checks
+        securitychecker: ~
