@@ -34,9 +34,11 @@ class Configuration extends BaseConfiguration
         $rootNode = $treeBuilder->getRootNode();
         //==============================================================================
         // Override Tasks ArrayNode
+        /** @phpstan-ignore-next-line */
         $rootNode->find('tasks')->useAttributeAsKey('name');
         //==============================================================================
         // Override TestSuite ArrayNode
+        /** @phpstan-ignore-next-line */
         $rootNode->find('testsuites')->useAttributeAsKey('name');
 
         return $treeBuilder;

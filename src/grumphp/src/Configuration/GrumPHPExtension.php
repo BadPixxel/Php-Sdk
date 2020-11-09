@@ -23,6 +23,10 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 class GrumPHPExtension extends Extension
 {
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $this->loadInternal(
@@ -34,16 +38,31 @@ class GrumPHPExtension extends Extension
         );
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     *
+     * @return ConfigurationInterface
+     */
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         return new Configuration();
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return 'grumphp';
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
     private function loadInternal(array $config, ContainerBuilder $container): void
     {
         foreach ($config as $key => $value) {
