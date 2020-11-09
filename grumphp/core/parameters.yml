@@ -30,14 +30,3 @@ parameters:
     stan-level:          8
     stan-config:         "%core_dir%/phpstan/%mode%.neon"
     stan-exclude:        "%exclude%"
-
-    # For Building Splash Module
-    mod-enable:     true
-    mod-src:        '/src/Resources/docs'
-    mod-file:       "module"
-    # For Building Splash Documentation
-    doc-enable:     true
-    doc-src:        '/src/Resources/docs'
-    doc-contents:   ["module", "splash"]    
-    # For Building Splash Manifest
-    yml-enable:     true
