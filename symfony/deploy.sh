@@ -12,12 +12,20 @@
 #
 ################################################################################
 
-echo -e "\e[104m Deploy Symfony                        \e[49m"
+echo "----------------------------------------------------"
+echo "--> Deploy Symfony"
+echo "----------------------------------------------------"
 
 if [ -f "tests/config/parameters.yml.dist" ];
 then
   echo "Symfony => Configuring Parameters"
   cp tests/config/parameters.yml.dist tests/config/parameters.yml
+fi;
+
+if [ -f "app/config/parameters.yml.dist" ];
+then
+  echo "Symfony => Configuring Parameters"
+  cp app/config/parameters.yml.dist app/config/parameters.yml
 fi;
 
 if [ -f "tests/console" ];

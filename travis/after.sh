@@ -12,7 +12,9 @@
 #
 ################################################################################
 
-echo -e "\e[104m After Script       \e[49m"
+echo "----------------------------------------------------"
+echo "--> After Script"
+echo "----------------------------------------------------"
 
-# Show Outdated Packages
+echo "Composer ==> Outdated Packages"
 composer outdated -D

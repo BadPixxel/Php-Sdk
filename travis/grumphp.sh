@@ -12,7 +12,9 @@
 #
 ################################################################################
 
-echo -e "\e[104m Grumphp Code Quality Tests Suite       \e[49m"
+echo "----------------------------------------------------"
+echo "--> Grumphp Code Quality Tests Suite"
+echo "----------------------------------------------------"
 
 # Grumphp Travis Testsuite
 php vendor/bin/grumphp run -n --testsuite=travis

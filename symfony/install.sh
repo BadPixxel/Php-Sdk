@@ -12,7 +12,9 @@
 #
 ################################################################################
 
-echo -e "\e[104m Install Symfony                        \e[49m"
+echo "----------------------------------------------------"
+echo "--> Install Symfony"
+echo "----------------------------------------------------"
 
 echo "Symfony => Build Dependencies"
 composer update  --prefer-dist --no-interaction  
