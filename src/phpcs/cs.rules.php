@@ -15,13 +15,13 @@ global $header, $finder;
 
 $config = PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
-    ->setRules([
+    ->setRules(array(
         '@PSR2' => true,
         '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
-        'array_syntax' => ['syntax' => 'long'],
+        'array_syntax' => array('syntax' => 'long'),
         'blank_line_before_statement' => true,
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
@@ -32,27 +32,27 @@ $config = PhpCsFixer\Config::create()
         'explicit_string_variable' => true,
         'final_internal_class' => true,
         'fully_qualified_strict_types' => true,
-        'function_to_constant' => [
-            'functions' => ['get_class', 'get_called_class', 'php_sapi_name', 'phpversion', 'pi']
-            ],
-        'header_comment' => ['header' => $header],
+        'function_to_constant' => array(
+            'functions' => array('get_class', 'get_called_class', 'php_sapi_name', 'phpversion', 'pi')
+        ),
+        'header_comment' => array('header' => $header),
         'heredoc_to_nowdoc' => true,
-        'list_syntax' => ['syntax' => 'long'],
+        'list_syntax' => array('syntax' => 'long'),
         'logical_operators' => true,
-        'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
+        'method_argument_space' => array('on_multiline' => 'ensure_fully_multiline'),
         'method_chaining_indentation' => true,
         'multiline_comment_opening_closing' => true,
         'no_alternative_syntax' => true,
         'no_binary_string' => true,
-        'no_extra_blank_lines' => [
-            'tokens' => [
+        'no_extra_blank_lines' => array(
+            'tokens' => array(
                 'break', 'continue', 'extra',
                 'return', 'throw', 'use',
                 'parenthesis_brace_block',
                 'square_brace_block',
                 'curly_brace_block'
-                ]
-            ],
+            )
+        ),
         'no_null_property_initialization' => true,
         'no_short_echo_tag' => true,
         'no_superfluous_elseif' => true,
@@ -70,7 +70,7 @@ $config = PhpCsFixer\Config::create()
         'php_unit_set_up_tear_down_visibility' => true,
         'php_unit_strict' => false,
         'php_unit_test_annotation' => true,
-        'php_unit_test_case_static_method_calls' => ['call_type' => 'this'],
+        'php_unit_test_case_static_method_calls' => array('call_type' => 'this'),
         'php_unit_test_class_requires_covers' => false,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_align' => true,
@@ -92,8 +92,7 @@ $config = PhpCsFixer\Config::create()
         'concat_space' => true,
         'binary_operator_spaces' => true,
         'no_unused_imports' => true,
-        
-    ])
+    ))
     ->setFinder($finder)
 ;
 
@@ -105,10 +104,10 @@ if (false !== getenv('FABBOT_IO')) {
             ->registerCustomFixers($config->getCustomFixers())
             ->useRuleSet(new PhpCsFixer\RuleSet($config->getRules()));
     } catch (PhpCsFixer\ConfigurationException\InvalidConfigurationException $e) {
-        $config->setRules([]);
+        $config->setRules(array());
     } catch (UnexpectedValueException $e) {
-        $config->setRules([]);
+        $config->setRules(array());
     } catch (InvalidArgumentException $e) {
-        $config->setRules([]);
+        $config->setRules(array());
     }
 }

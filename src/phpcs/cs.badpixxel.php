@@ -11,14 +11,15 @@
  *  file that was distributed with this source code.
  */
 
-global $config;
+global $config, $finder;
 
 include_once "headers/badpixxel.php";
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(dirname(dirname(__DIR__)))
+    ->in($_SERVER['PWD'])
     ->exclude('vendor')
     ->exclude('tests/Fixtures')
+    ->exclude('var')
 ;
 
 include_once "cs.rules.php";

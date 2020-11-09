@@ -12,7 +12,7 @@
 ################################################################################
 
 includes:
-	- ../../../../../vendor/phpstan/phpstan-phpunit/extension.neon
+	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false

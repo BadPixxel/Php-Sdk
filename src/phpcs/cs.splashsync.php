@@ -17,9 +17,9 @@ include_once "headers/splashsync.php";
 
 $finder = PhpCsFixer\Finder::create()
     ->in($_SERVER['PWD'])
-    ->exclude('var')
     ->exclude('vendor')
     ->exclude('tests/Fixtures')
+    ->exclude('var')
 ;
 
 include_once "cs.rules.php";
