@@ -12,22 +12,24 @@
 #
 ################################################################################
 
-echo -e "\e[104m Config Travis        \e[49m"
+echo -e "\e[104m Deploy Symfony                        \e[49m"
 
-# With PHP < 7.3 => Rollback to Composer 1
-if [[ ${TRAVIS_PHP_VERSION:0:3} < "7.3" ]]; then
-    composer self-update --2;
-fi
-
-# Setup Travis PHP     
-if [ "$TRAVIS_PHP_VERSION" != "hhvm" ];
+if [ -f "tests/config/parameters.yml.dist" ];
 then
-  echo "memory_limit = -1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini;
-fi
+  echo "Symfony => Configuring Parameters"
+  cp tests/config/parameters.yml.dist tests/config/parameters.yml
+fi;
 
-# Setup Composer Stability if Required
-if ! [ -z "$STABILITY" ];
+if [ -f "tests/console" ];
 then
-  echo "Composer => Force minimum-stability ${STABILITY}";
-  composer config minimum-stability ${STABILITY};
+  echo "Symfony => Configuring Console"
+  cp tests/console bin/console
+fi;
+
+if [ -d "tests/public" ];
+then
+  echo "Symfony => Configuring Public Folder"
+  mkdir public
+  cp tests/public/* public
+  cp tests/public/.htaccess public/.htaccess
 fi;
