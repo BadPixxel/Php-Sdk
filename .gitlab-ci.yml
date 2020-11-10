@@ -11,8 +11,7 @@
 #
 ################################################################################
 
-tags:
-  - Dedicated
+
 
 # Composer stores all downloaded packages in the vendor/ directory.
 # Do not use the following if the vendor/ directory is committed to
@@ -35,6 +34,8 @@ before_script:
 
 test:app:
   image: php:7.3
+  tags:
+    - Dedicated
   script:
     # Composer Build
     - cat  travis/composer.sh | sh
