@@ -73,21 +73,13 @@ tests:php-7.2:
       - .gitlab-ci.yml
 
 php-7.2:
-#    variables:
-#        DOCKER_TAG:       php-7.2
-    <<: *docker
+  <<: *docker
 
 php-7.3:
-#    variables:
-#        DOCKER_TAG:       php-7.3
     <<: *docker
 
 php-7.4:
-#    variables:
-#        DOCKER_TAG:       php-7.4
     <<: *docker
 
 php-8.0:
-#    variables:
-#        DOCKER_TAG:       php-8.0
     <<: *docker
