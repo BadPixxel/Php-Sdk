@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget d
 ################################################################
 
 # Zip | Xml | Soap | Bcmath | Mbstring | Gd
-RUN apt-get update && apt-get install --no-install-recommends-y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-install zip xml soap bcmath \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
