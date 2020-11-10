@@ -1,0 +1,43 @@
+################################################################################
+#
+# Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+################################################################################
+
+# Composer stores all downloaded packages in the vendor/ directory.
+# Do not use the following if the vendor/ directory is committed to
+# your git repository.
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  # Install git (the php image doesn't have it) which is required by composer
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  # Install composer dependencies
+  - wget https://composer.github.io/installer.sig -O - -q | tr -d '\n' > installer.sig
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php -r "if (hash_file('SHA384', 'composer-setup.php') === file_get_contents('installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
+  - php composer.phar install
+
+
+test:
+  # Composer Build
+  - cat  travis/composer.sh | sh
+  # Execute Grump Travis Testsuite
+  - cat travis/grumphp.sh | sh
+
+################################################################################
+# Run After Script
+after_script:
+  - cat  travis/after.sh | sh
