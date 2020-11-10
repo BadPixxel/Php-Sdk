@@ -11,26 +11,66 @@
 #
 ################################################################################
 
+################################################################
+# Defined Pipeline Stages
+stages:
+  - docker
+  - tests
 
-
-# Composer stores all downloaded packages in the vendor/ directory.
-# Do not use the following if the vendor/ directory is committed to
-# your git repository.
-cache:
-  paths:
-    - vendor/
-
-test:app:
-  image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
+################################################################
+# Build Docker Images for Testing
+################################################################
+docker:
+  stage:      docker
+  image:      docker:stable
   tags:
-    - Dedicated
+    - docker
+  services:
+    - docker:dind
+  before_script:
+    - docker info
   script:
-    # Composer Build
-    - cat  travis/composer.sh | sh
-    # Execute Grump Travis Testsuite
-    - cat travis/grumphp.sh | sh
+    # Connect Docker to GitLab
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    # Build & Upload Splash All Docker Images
+    - bash docker/update.sh
+  except:
+    - schedules
+  only:
+    changes:
+      - docker/*
 
-################################################################################
-# Run After Script
-after_script:
-  - cat  travis/after.sh | sh
+################################################################
+# Functional Tests
+################################################################
+
+.core_tests:    &core_tests
+    image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
+    stage:      docker
+    tags:
+        - Dedicated
+    script:
+        # Composer Build
+        - cat  travis/composer.sh | sh
+        # Execute Grump Travis Testsuite
+        - cat travis/grumphp.sh | sh
+    after_script:
+        # Run After Script
+        - cat  travis/after.sh | sh
+
+#tests:php-7.4:
+#  image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
+#  <<: *core_tests
+
+tests:php-7.4:
+  image: registry.gitlab.com/badpixxel/php-sdk:php-7.4
+  <<: *core_tests
+
+tests:php-7.3:
+  image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
+  <<: *core_tests
+
+tests:php-7.2:
+  image: registry.gitlab.com/badpixxel/php-sdk:php-7.2
+  <<: *core_tests
+

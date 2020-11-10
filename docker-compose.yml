@@ -21,65 +21,37 @@ version: "3.5"
 services:
 
     ################################################################################
-    # Splash Server Container (Symfony)
+    # PHP 8.0
+    php-8.0:
+        build:
+            context: ./docker/php-8.0
+        container_name: php80.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html
+
+    ################################################################################
+    # PHP 7.4
+    php-7.4:
+        build:
+            context: ./docker/php-7.4
+        container_name: php74.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html
+
+    ################################################################################
+    # PHP 7.3
     php-7.3:
         build:
             context: ./docker/php-7.3
         container_name: php73.badpixxel.sdk.local
-#        depends_on:
-#            - mysql
-#            - mongo
-#            - phpmyadmin
         volumes:
-            # Server Sources in Read Only Mode
             - ./:/var/www/html
-#        entrypoint: sh /builds/BadPixxel/Splash/docs/docker/splash/docker-entrypoint.sh
-        tty: true
-#        hostname: test.splashsync.local
-#        networks:
-#            default:        { ipv4_address: 172.0.0.10, aliases: [ www.splashsync.local dev.splashsync.local admin.splashsync.local test.splashsync.local ] }
-#            splashsync:     { aliases: [ www.splashsync.local dev.splashsync.local admin.splashsync.local test.splashsync.local ] }
 
-#    ################################################################################
-#    # PhpMyAdmin Container
-#    phpmyadmin:
-#        image: phpmyadmin/phpmyadmin:5
-#        container_name: phpmyadmin.splashsync.local
-#        depends_on:
-#            - mysql
-#        environment:
-#            - PMA_HOST=mysql
-#            - MYSQL_USER=Splash
-#            - MYSQL_ROOT_PASSWORD=SPLASH_CI
-#            - MYSQL_PASSWORD=SPLASH_CI
-#            - UPLOAD_LIMIT=300000000
-#        networks:
-#            default:        { ipv4_address: 172.0.0.13, aliases: [ phpmyadmin.splashsync.local ] }
-#
-#    ################################################################################
-#    # Node JS Container
-#    node:
-#        image: 'node'
-#        user: 'node'
-#        container_name: splashsync_nodeJs
-#        volumes:
-#            - './:/srv'
-#            - ~/.cache/yarn:/home/node/.yarn-cache
-#        working_dir: '/srv'
-#        networks:
-#          - 'default'
-#
-#
-#networks:
-#    ################################################################################
-#    # Default Private Network
-#    default:
-#        driver: bridge
-#        ipam:
-#            config:
-#                - subnet: 172.0.0.0/24
-#    ################################################################################
-#    # External Splash Network
-#    splashsync:
-#        external: true
-#        name: splashsync
+    ################################################################################
+    # PHP 7.2
+    php-7.2:
+        build:
+            context: ./docker/php-7.2
+        container_name: php72.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html

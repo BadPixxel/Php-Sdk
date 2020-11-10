@@ -1,4 +1,4 @@
-FROM php:7.3-apache-stretch
+FROM php:7.2-apache-stretch
 
 ################################################################
 # Install Varions Tools
@@ -21,22 +21,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libz
     && docker-php-ext-enable mongodb \
     && docker-php-source delete \
     && pecl clear-cache
-
-## Apcu
-#RUN pecl install apcu \
-#    && docker-php-source delete
-## Mongodb
-#RUN pecl install mongodb \
-#    && docker-php-source delete
-#
-## Gd
-#RUN apt-get update && apt-get install -y \
-#        libfreetype6-dev \
-#        libjpeg62-turbo-dev \
-#        libpng-dev \
-#    && docker-php-source delete
-
-RUN php -m
 
 ################################################################
 # Install Composer
