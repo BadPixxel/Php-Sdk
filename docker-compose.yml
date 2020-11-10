@@ -1,0 +1,85 @@
+
+################################################################################
+#
+# Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+################################################################################
+
+################################################################################
+# Docker Compose File
+################################################################################
+
+version: "3.5"
+
+services:
+
+    ################################################################################
+    # Splash Server Container (Symfony)
+    php-7.3:
+        build:
+            context: ./docker/php-7.3
+        container_name: php73.badpixxel.sdk.local
+#        depends_on:
+#            - mysql
+#            - mongo
+#            - phpmyadmin
+        volumes:
+            # Server Sources in Read Only Mode
+            - ./:/var/www/html
+#        entrypoint: sh /builds/BadPixxel/Splash/docs/docker/splash/docker-entrypoint.sh
+        tty: true
+#        hostname: test.splashsync.local
+#        networks:
+#            default:        { ipv4_address: 172.0.0.10, aliases: [ www.splashsync.local dev.splashsync.local admin.splashsync.local test.splashsync.local ] }
+#            splashsync:     { aliases: [ www.splashsync.local dev.splashsync.local admin.splashsync.local test.splashsync.local ] }
+
+#    ################################################################################
+#    # PhpMyAdmin Container
+#    phpmyadmin:
+#        image: phpmyadmin/phpmyadmin:5
+#        container_name: phpmyadmin.splashsync.local
+#        depends_on:
+#            - mysql
+#        environment:
+#            - PMA_HOST=mysql
+#            - MYSQL_USER=Splash
+#            - MYSQL_ROOT_PASSWORD=SPLASH_CI
+#            - MYSQL_PASSWORD=SPLASH_CI
+#            - UPLOAD_LIMIT=300000000
+#        networks:
+#            default:        { ipv4_address: 172.0.0.13, aliases: [ phpmyadmin.splashsync.local ] }
+#
+#    ################################################################################
+#    # Node JS Container
+#    node:
+#        image: 'node'
+#        user: 'node'
+#        container_name: splashsync_nodeJs
+#        volumes:
+#            - './:/srv'
+#            - ~/.cache/yarn:/home/node/.yarn-cache
+#        working_dir: '/srv'
+#        networks:
+#          - 'default'
+#
+#
+#networks:
+#    ################################################################################
+#    # Default Private Network
+#    default:
+#        driver: bridge
+#        ipam:
+#            config:
+#                - subnet: 172.0.0.0/24
+#    ################################################################################
+#    # External Splash Network
+#    splashsync:
+#        external: true
+#        name: splashsync
