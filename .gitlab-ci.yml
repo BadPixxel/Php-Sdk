@@ -39,6 +39,7 @@ docker:
   only:
     changes:
       - docker/*
+      - .gitlab-ci.yml
 
 ################################################################
 # Functional Tests
