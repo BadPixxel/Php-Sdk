@@ -28,6 +28,7 @@ services:
         container_name: php80.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
+#        command:    "bash /var/www/html/docker/entrypoint.sh"
 
     ################################################################################
     # PHP 7.4
@@ -37,6 +38,7 @@ services:
         container_name: php74.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
+#        command:    "bash /var/www/html/docker/entrypoint.sh"
 
     ################################################################################
     # PHP 7.3
@@ -46,6 +48,7 @@ services:
         container_name: php73.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
+#        command:    "bash /var/www/html/docker/entrypoint.sh"
 
     ################################################################################
     # PHP 7.2
@@ -55,3 +58,4 @@ services:
         container_name: php72.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
+#        command:    "bash /var/www/html/docker/entrypoint.sh"
