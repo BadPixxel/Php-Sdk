@@ -34,6 +34,7 @@ before_script:
   - php composer.phar install
 
 test:app:
+  image: php:7.3
   script:
     # Composer Build
     - cat  travis/composer.sh | sh
