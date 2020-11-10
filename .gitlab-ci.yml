@@ -45,8 +45,7 @@ docker:
 ################################################################
 
 .core_tests:    &core_tests
-    image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
-    stage:      docker
+    stage:      tests
     tags:
         - Dedicated
     script:

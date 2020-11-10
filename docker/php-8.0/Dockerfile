@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libz
     && docker-php-ext-install zip xml soap bcmath \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-source delete \
-    && pecl clear-cache
+    && docker-php-source delete
 
 # Apcu
 RUN mkdir -p /usr/src/php/ext/apcu \
