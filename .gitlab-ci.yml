@@ -18,30 +18,6 @@ stages:
   - tests
 
 ################################################################
-# Build Docker Images for Testing
-################################################################
-docker:
-  stage:      docker
-  image:      docker:stable
-  tags:
-    - docker
-  services:
-    - docker:dind
-  before_script:
-    - docker info
-  script:
-    # Connect Docker to GitLab
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    # Build & Upload Splash All Docker Images
-    - sh docker/update.sh
-  except:
-    - schedules
-  only:
-    changes:
-      - docker/*
-      - .gitlab-ci.yml
-
-################################################################
 # Functional Tests
 ################################################################
 
@@ -70,3 +46,48 @@ tests:php-7.2:
   image: registry.gitlab.com/badpixxel/php-sdk:php-7.2
   <<: *core_tests
 
+################################################################
+# Build Docker Images for Testing
+################################################################
+.docker:      &docker
+  stage:      docker
+  image:      docker:stable
+  tags:
+    - docker
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+  script:
+    - echo "[$DOCKER_TAG] Build & Upload Docker Image"
+    # Connect Docker to GitLab
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    # Build & Upload Splash All Docker Images
+    - docker build -t registry.gitlab.com/badpixxel/php-sdk:$DOCKER_TAG docker/$DOCKER_TAG
+    - docker push registry.gitlab.com/badpixxel/php-sdk:$DOCKER_TAG
+  except:
+    - schedules
+  only:
+    changes:
+      - docker/*
+      - .gitlab-ci.yml
+
+docker:php-7.2:
+  variables:
+    DOCKER_TAG:php-7.2
+  <<: *docker
+
+docker:php-7.3:
+  variables:
+    DOCKER_TAG:php-7.3
+  <<: *docker
+
+docker:php-7.4:
+  variables:
+    DOCKER_TAG:php-7.4
+  <<: *docker
+
+docker:php-8.0:
+  variables:
+    DOCKER_TAG:php-8.0
+  <<: *docker
