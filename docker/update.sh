@@ -13,17 +13,17 @@
 ################################################################################
 
 echo "[PHP 7.2] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel/php-sdk:php-7.2 docker/php-7.2
-docker push registry.gitlab.com/badpixxel/php-sdk:php-7.2
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-7.2 docker/php-7.2
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-7.2
 
 echo "[PHP 7.3] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel/php-sdk:php-7.3 docker/php-7.3
-docker push registry.gitlab.com/badpixxel/php-sdk:php-7.3
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-7.3 docker/php-7.3
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-7.3
 
 echo "[PHP 7.4] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel/php-sdk:php-7.4 docker/php-7.4
-docker push registry.gitlab.com/badpixxel/php-sdk:php-7.4
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4 docker/php-7.4
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4
 
 echo "[PHP 8.0] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel/php-sdk:php-8.0 docker/php-8.0
-docker push registry.gitlab.com/badpixxel/php-sdk:php-8.0
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0 docker/php-8.0
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
