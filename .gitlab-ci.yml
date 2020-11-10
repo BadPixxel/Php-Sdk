@@ -35,15 +35,15 @@ stages:
         - cat  travis/after.sh | sh
 
 tests:php-7.4:
-  image: registry.gitlab.com/badpixxel/php-sdk:php-7.4
+  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4
   <<: *core_tests
 
 tests:php-7.3:
-  image: registry.gitlab.com/badpixxel/php-sdk:php-7.3
+  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.3
   <<: *core_tests
 
 tests:php-7.2:
-  image: registry.gitlab.com/badpixxel/php-sdk:php-7.2
+  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.2
   <<: *core_tests
 
 ################################################################
