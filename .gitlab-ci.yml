@@ -34,7 +34,7 @@ before_script:
   - php composer.phar install
 
 
-test:app:
+script:
   # Composer Build
   - cat  travis/composer.sh | sh
   # Execute Grump Travis Testsuite
