@@ -11,6 +11,9 @@
 #
 ################################################################################
 
+tags:
+  - Dedicated
+
 # Composer stores all downloaded packages in the vendor/ directory.
 # Do not use the following if the vendor/ directory is committed to
 # your git repository.
@@ -31,7 +34,7 @@ before_script:
   - php composer.phar install
 
 
-test:
+test:app:
   # Composer Build
   - cat  travis/composer.sh | sh
   # Execute Grump Travis Testsuite
