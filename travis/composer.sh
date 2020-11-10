@@ -17,4 +17,4 @@ echo "--> Install Composer Dependencies"
 echo "----------------------------------------------------"
 
 echo "Composer => Update"
-composer update  --prefer-dist --no-interaction  --no-suggest
+composer update  --prefer-dist --no-interaction --no-progress --no-suggest
