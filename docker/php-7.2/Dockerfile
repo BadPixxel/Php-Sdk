@@ -23,6 +23,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libz
     && pecl clear-cache
 
 ################################################################
+# Configure Php
+################################################################
+
+RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
+
+################################################################
 # Install Composer
 ################################################################
 

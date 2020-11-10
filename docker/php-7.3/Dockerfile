@@ -22,21 +22,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libz
     && docker-php-source delete \
     && pecl clear-cache
 
-## Apcu
-#RUN pecl install apcu \
-#    && docker-php-source delete
-## Mongodb
-#RUN pecl install mongodb \
-#    && docker-php-source delete
-#
-## Gd
-#RUN apt-get update && apt-get install -y \
-#        libfreetype6-dev \
-#        libjpeg62-turbo-dev \
-#        libpng-dev \
-#    && docker-php-source delete
+################################################################
+# Configure Php
+################################################################
 
-RUN php -m
+RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
 
 ################################################################
 # Install Composer
