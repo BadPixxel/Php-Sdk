@@ -33,12 +33,12 @@ before_script:
   - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
   - php composer.phar install
 
-
-script:
-  # Composer Build
-  - cat  travis/composer.sh | sh
-  # Execute Grump Travis Testsuite
-  - cat travis/grumphp.sh | sh
+test:app:
+  script:
+    # Composer Build
+    - cat  travis/composer.sh | sh
+    # Execute Grump Travis Testsuite
+    - cat travis/grumphp.sh | sh
 
 ################################################################################
 # Run After Script
