@@ -22,7 +22,3 @@ then
   echo "Symfony => Update to Symfony $SF_VERSION";
   composer require --no-update symfony/symfony=$SF_VERSION;
 fi;
-
-# Create Database
-echo "Symfony => Create Database (symfony)"
-mysql -e 'CREATE DATABASE IF NOT EXISTS symfony;'
