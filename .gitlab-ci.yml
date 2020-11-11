@@ -53,7 +53,8 @@ tests:php-7.2:
   stage:      docker
   image:      docker:stable
   tags:
-    - docker
+#    - docker
+    - Dedicated-Docker
   services:
     - docker:dind
   before_script:
