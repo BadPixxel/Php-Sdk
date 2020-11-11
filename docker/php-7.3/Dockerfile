@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget m
 # Apcu | Mongodb | Gd
 RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && pecl install apcu mongodb \
-    && docker-php-ext-install zip xml soap bcmath mbstring \
+    && docker-php-ext-install zip xml soap bcmath mbstring pdo_mysql pcntl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable apcu \
