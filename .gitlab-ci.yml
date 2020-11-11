@@ -70,7 +70,7 @@ tests:php-7.2:
     - schedules
   only:
     changes:
-      - docker/*
+      - docker/**/*
       - .gitlab-ci.yml
 
 php-7.2:
