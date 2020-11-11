@@ -27,12 +27,12 @@ stages:
         - Dedicated
     script:
         # Composer Build
-        - cat  travis/composer.sh | sh
+        - cat ci/composer.sh | sh
         # Execute Grump Travis Testsuite
-        - cat travis/grumphp.sh | sh
+        - cat ci/grumphp.sh | sh
     after_script:
         # Run After Script
-        - cat  travis/after.sh | sh
+        - cat ci/after.sh | sh
 
 tests:php-7.4:
   image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4
