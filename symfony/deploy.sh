@@ -28,6 +28,12 @@ then
   cp app/config/parameters.yml.dist app/config/parameters.yml
 fi;
 
+if [ ! -f "bin" ];
+then
+  echo "Symfony => Create Bin Dir"
+  mkdir bin
+fi;
+
 if [ -f "tests/console" ];
 then
   echo "Symfony => Configuring Console"
