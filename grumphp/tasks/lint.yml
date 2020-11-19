@@ -16,7 +16,7 @@ grumphp:
             ignore_patterns:        "%exclude%"
         twigcs:
             path:                   '.'
-            severity:               'warning'
+            severity:               'ignore'
             ruleset:                'FriendsOfTwig\Twigcs\Ruleset\Official'
             triggered_by:           ['twig']
             exclude:                "%exclude%"
