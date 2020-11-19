@@ -28,6 +28,12 @@ then
   cp app/config/parameters.yml.dist app/config/parameters.yml
 fi;
 
+if [ -f ".env.dist" ];
+then
+  echo "Symfony => Configuring DotEnv"
+  cp .env.dist .env
+fi;
+
 if [ ! -f "bin" ];
 then
   echo "Symfony => Create Bin Dir"
