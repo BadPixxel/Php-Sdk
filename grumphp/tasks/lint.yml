@@ -14,6 +14,12 @@ grumphp:
         yamllint:
             parse_custom_tags:      true
             ignore_patterns:        "%exclude%"
+        twigcs:
+            path:                   '.'
+            severity:               'warning'
+            ruleset:                'FriendsOfTwig\Twigcs\Ruleset\Official'
+            triggered_by:           ['twig']
+            exclude:                "%exclude%"
         git_blacklist:
             keywords:
                 - "var_dump"

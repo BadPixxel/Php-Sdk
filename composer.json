@@ -41,6 +41,7 @@
       "sclable/xml-lint":                     "^0.3",
       "j13k/yaml-lint":                       "^1.1",
       "seld/jsonlint":                        "^1.7",
+      "friendsoftwig/twigcs":                 "^4.0",
 
       "phpmd/phpmd":                          "^2.6",
       "sebastian/phpcpd":                     ">3.0",
