@@ -24,4 +24,4 @@ parameters:
     ignoreErrors:
         - "#Casting to string something that's already string.#"
     symfony:
-        container_xml_path: %currentWorkingDirectory%/var/cache/dev/srcDevDebugProjectContainer.xml
+        container_xml_path: %currentWorkingDirectory%/var/cache/dev/testContainer.xml # or srcDevDebugProjectContainer.xml for Symfony 4+
