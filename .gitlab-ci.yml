@@ -83,14 +83,14 @@ php-7.4:
 php-8.0:
     <<: *docker
 
-pages:
+jekyll:
     <<: *docker
 
 #################################################################
 ## Build Documentation
 #################################################################
-build_pages:
-    image:      registry.gitlab.com/badpixxel-projects/php-sdk::pages
+pages:
+    image:      registry.gitlab.com/badpixxel-projects/php-sdk::jekyll
     stage:      deploy
     retry:      2
     tags:       [ Dedicated ]
