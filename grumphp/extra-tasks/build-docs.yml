@@ -1,0 +1,19 @@
+#############################################
+# Config for Building Documentation
+#############################################
+parameters:
+    doc-enable:     true
+    doc-src:        '/src/Resources/docs'
+    doc-target:     '/public'
+    doc-contents:   [ 'badpixxel-theme', 'php-composer' ]
+
+#############################################
+#   Grumphp Tasks
+#############################################
+grumphp:
+    tasks:
+        build-docs:
+            enabled:            "%doc-enable%"
+            local_folder:       "%doc-src%"
+            target_folder:      "%doc-target%"
+            generic_contents:   "%doc-contents%"

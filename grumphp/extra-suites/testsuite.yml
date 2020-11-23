@@ -1,0 +1,10 @@
+#############################################
+# Extra Test Suite
+# >>  Build Module, Docs & Manifest
+#############################################
+grumphp:
+    testsuites:
+        splash:
+            tasks:
+                - build-module
+                - build-docs

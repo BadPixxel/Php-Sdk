@@ -1,0 +1,20 @@
+#############################################
+# Config for Building Module
+#############################################
+parameters:
+    mod-enable:     true
+    mod-src:        '/'
+    mod-file:       "my-module.x.y.z"
+
+#############################################
+#   Grumphp Tasks
+#############################################
+grumphp:
+    tasks:
+        # For Building Module
+        build-module:
+            enabled:        "%mod-enable%"
+            source_folder:  "%mod-src%"
+            target_folder:  "/build"
+            build_folder:   ""
+            build_file:     "%mod-file%"

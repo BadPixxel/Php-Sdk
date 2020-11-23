@@ -11,13 +11,6 @@
 #
 ################################################################################
 
-#############################################        
-# Override Config. for Php Core Module
-parameters:
-    core_dir:               "./"
-
-#############################################        
-# Import Config. from Php Core Module
-imports:
-    - "./grumphp/generic.yml"
-    - "./grumphp/extras.yml"
+################################################################################
+# Install Jekyll
+gem install jekyll bundler

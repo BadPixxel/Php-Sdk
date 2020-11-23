@@ -11,13 +11,16 @@
 #
 ################################################################################
 
-#############################################        
-# Override Config. for Php Core Module
-parameters:
-    core_dir:               "./"
+#############################################
+# Register Grumphp Extension
+#############################################
+grumphp:
+    extensions:
+        - BadPixxel\PhpSdk\Extension\Loader
 
-#############################################        
-# Import Config. from Php Core Module
+#############################################
+#   Grumphp Extra Configurations
+#############################################
 imports:
-    - "./grumphp/generic.yml"
-    - "./grumphp/extras.yml"
+    - { resource: "./extra-tasks/*.yml" }
+    - { resource: "./extra-suites/*.yml" }

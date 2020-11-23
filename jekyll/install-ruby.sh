@@ -11,13 +11,13 @@
 #
 ################################################################################
 
-#############################################        
-# Override Config. for Php Core Module
-parameters:
-    core_dir:               "./"
+################################################################################
+# Install Ruby Full
+apt-get install ruby-full build-essential zlib1g-dev -y -q
 
-#############################################        
-# Import Config. from Php Core Module
-imports:
-    - "./grumphp/generic.yml"
-    - "./grumphp/extras.yml"
+################################################################################
+# Install & Config Gems
+echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc

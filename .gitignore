@@ -52,3 +52,5 @@
 /.web-server-pid
 /.idea/
 /.php_cs.cache
+/.gh-pages/
+/public/

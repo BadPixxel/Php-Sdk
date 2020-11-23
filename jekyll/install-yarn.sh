@@ -11,13 +11,9 @@
 #
 ################################################################################
 
-#############################################        
-# Override Config. for Php Core Module
-parameters:
-    core_dir:               "./"
+################################################################################
+# Install Yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-#############################################        
-# Import Config. from Php Core Module
-imports:
-    - "./grumphp/generic.yml"
-    - "./grumphp/extras.yml"
+apt update && apt install yarn -y -q

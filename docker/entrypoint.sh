@@ -12,8 +12,8 @@
 ################################################################################
 
 # Composer Build
-cat  travis/composer.sh | sh
+cat travis/composer.sh | sh
 # Execute Grump Travis Testsuite
 cat travis/grumphp.sh | sh
 # Run After Script
-cat  travis/after.sh | sh
+cat travis/after.sh | sh
