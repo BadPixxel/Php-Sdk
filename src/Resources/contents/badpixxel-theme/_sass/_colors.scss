@@ -1,0 +1,48 @@
+/*
+################################################################################
+#
+# Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+################################################################################
+*/
+
+//*************************** Theme Colours ****************************/
+
+// Main colour scheme
+$color-primary:               #8A40A7;
+$color-green:                 #75c181;
+$color-red:                   #f77b6b;
+$color-blue:                  #58bbee;
+$color-orange:                #ffd369;
+$color-pink:                  #40a8c4;
+$color-purple:                #8A40A7;
+$color-white:                 #222831;
+$color-dark:                  #222831;
+
+// Secondary colour scheme
+$text-color:                  #eeeeee;
+$text-color-secondary:        $text-color;
+$text-grey:                   lighten($text-color-secondary, 25%);
+$grey:                        lighten($text-color-secondary, 25%);
+$light-grey:                  #c3c3c3;
+$dark-grey:                   #666;
+$black:                       #FFF;
+$smoky-white:                 $color-white;
+$smoky-grey:                  #393e46;
+$divider:                     #222831;
+$white:                       lighten($color-white, 10%);
+
+// Brands colour scheme
+$new:                         #60A823;
+$error:                       #E65348;
+$facebook:                    #3b5998;
+$twitter:                     #55acee;
+$google:                      #dd4b39;
+$github:                      #444;
