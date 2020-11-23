@@ -1,9 +1,7 @@
 <?php
 
 /*
- *  This file is part of SplashSync Project.
- *
- *  Copyright (C) 2015-2020 Splash Sync  <www.splashsync.com>
+ *  Copyright (C) 2020 BadPixxel <www.badpixxel.com>
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,7 +13,9 @@
 
 namespace BadPixxel\PhpSdk\Task;
 
+use BadPixxel\PhpSdk\Helper\Composer;
 use BadPixxel\PhpSdk\Helper\SplashFaker;
+use BadPixxel\PhpSdk\Helper\ZipBuilder;
 use GrumPHP\Configuration\GrumPHP;
 use GrumPHP\Formatter\ProcessFormatterInterface as Formater;
 use GrumPHP\Process\ProcessBuilder;
@@ -26,8 +26,6 @@ use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
 use GrumPHP\Util\Paths;
-use BadPixxel\PhpSdk\Helper\Composer;
-use BadPixxel\PhpSdk\Helper\ZipBuilder;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -120,14 +118,14 @@ class ModuleBuilder extends AbstractExternalTask
         $this->options = $this->getConfig()->getOptions();
 
         //====================================================================//
+        // Initialize Empty Local Class for Splash Modules
+        SplashFaker::init();
+
+        //====================================================================//
         // Build Disabled => Skip this Task
         if (!$this->options["enabled"]) {
             return TaskResult::createPassed($this, $context);
         }
-
-        //====================================================================//
-        // Initialize Empty Local Class for Splash Modules
-        SplashFaker::init();;
 
         //====================================================================//
         // Init Module Build Directory

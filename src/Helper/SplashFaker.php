@@ -1,8 +1,17 @@
 <?php
 
+/*
+ *  Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
 
 namespace BadPixxel\PhpSdk\Helper;
-
 
 /**
  * Initialize Empty Local Class for Splash Modules
@@ -20,11 +29,11 @@ class SplashFaker
     /**
      * Init Empty Local Class
      */
-    static public function init(): void
+    public static function init(): void
     {
         //====================================================================//
         // Check if Splash PhpCore Module is Loaded
-        if(!class_exists(self::CORE_CLASS) || !class_exists(self::TEMPLATE_CLASS)) {
+        if (!class_exists(self::CORE_CLASS) || !class_exists(self::TEMPLATE_CLASS)) {
             return;
         }
         //====================================================================//
@@ -35,5 +44,4 @@ class SplashFaker
         $coreClass::translator()->load('local');
         $coreClass::log()->cleanLog();
     }
-
 }

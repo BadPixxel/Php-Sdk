@@ -54,3 +54,4 @@
 /.php_cs.cache
 /.gh-pages/
 /public/
+/src/Resources/jekyll/yarn.lock

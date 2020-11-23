@@ -1,9 +1,7 @@
 <?php
 
 /*
- *  This file is part of SplashSync Project.
- *
- *  Copyright (C) 2015-2020 Splash Sync  <www.splashsync.com>
+ *  Copyright (C) 2020 BadPixxel <www.badpixxel.com>
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,6 +13,8 @@
 
 namespace BadPixxel\PhpSdk\Task;
 
+use BadPixxel\PhpSdk\Helper\ShellRunner;
+use BadPixxel\PhpSdk\Helper\SplashFaker;
 use GrumPHP\Configuration\GrumPHP;
 use GrumPHP\Formatter\ProcessFormatterInterface as Formater;
 use GrumPHP\Process\ProcessBuilder;
@@ -25,12 +25,11 @@ use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
 use GrumPHP\Util\Paths;
-use BadPixxel\PhpSdk\Helper\ShellRunner;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
-use BadPixxel\PhpSdk\Helper\SplashFaker;
 
 /**
  * Grumphp Task: Jekyll Documentation Builder
@@ -130,7 +129,8 @@ class DocumentationBuilder extends AbstractExternalTask
 
         //====================================================================//
         // Initialize Empty Local Class for Splash Modules
-        SplashFaker::init();;
+        SplashFaker::init();
+        ;
 
         //====================================================================//
         // Init Module Build Directory
@@ -191,8 +191,6 @@ class DocumentationBuilder extends AbstractExternalTask
             $filesystem->remove($this->getTempDirectory());
             $filesystem->mkdir($this->getTempDirectory());
         } catch (IOExceptionInterface $exception) {
-            Splash::log()->errTrace($exception->getMessage());
-
             return "An error occurred while creating your directory at ".$exception->getPath();
         }
 
@@ -226,7 +224,10 @@ class DocumentationBuilder extends AbstractExternalTask
             foreach ($contentDirs as $contentDir) {
                 try {
                     $filesystem->mirror(
-                        $contentDir, $this->getTempDirectory(), null, array("override" => true)
+                        $contentDir,
+                        $this->getTempDirectory(),
+                        null,
+                        array("override" => true)
                     );
                 } catch (IOExceptionInterface $exception) {
                     return "An error occurred while Generic Contents copy at ".$exception->getPath();
@@ -307,17 +308,21 @@ class DocumentationBuilder extends AbstractExternalTask
      */
     private function buildConfig(): ?string
     {
-        //====================================================================//
-        // Load Generic Configuration
-        $coreConfig = Yaml::parseFile($this->getJekyllSrcDirectory().'/_config.yml');
-        //====================================================================//
-        // Load Local Configuration
-        $localConfig = Yaml::parseFile($this->getLocalContentsDirectory().'/_config.yml');
-        //====================================================================//
-        // Load Module Splash Manifest
-        $manifest = array("manifest" => null);
-        if (is_file($this->getManifestPath())) {
-            $manifest = array("manifest" => Yaml::parseFile($this->getManifestPath()));
+        try {
+            //====================================================================//
+            // Load Generic Configuration
+            $coreConfig = Yaml::parseFile($this->getJekyllSrcDirectory().'/_config.yml');
+            //====================================================================//
+            // Load Local Configuration
+            $localConfig = Yaml::parseFile($this->getLocalContentsDirectory().'/_config.yml');
+            //====================================================================//
+            // Load Module Splash Manifest
+            $manifest = array("manifest" => null);
+            if (is_file($this->getManifestPath())) {
+                $manifest = array("manifest" => Yaml::parseFile($this->getManifestPath()));
+            }
+        } catch (ParseException $exception) {
+            return "Unable to build Jekyll Configuration";
         }
         //====================================================================//
         // Build Final Configuration
@@ -398,7 +403,7 @@ class DocumentationBuilder extends AbstractExternalTask
             // Walk on Possible Content Paths
             foreach ($possiblePaths as $possiblePath) {
                 if (is_dir($possiblePath)) {
-                    $paths[] = realpath($possiblePath);
+                    $paths[] = (string) realpath($possiblePath);
                 }
             }
         }

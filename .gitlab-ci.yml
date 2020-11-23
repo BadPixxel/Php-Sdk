@@ -16,6 +16,7 @@
 stages:
   - docker
   - tests
+  - deploy
 
 ################################################################
 # Functional Tests
@@ -23,8 +24,7 @@ stages:
 
 .core_tests:    &core_tests
     stage:      tests
-    tags:
-        - Dedicated
+    tags:       [ Dedicated ]
     script:
         # Composer Build
         - cat ci/composer.sh | sh
@@ -49,12 +49,10 @@ tests:php-7.2:
 ################################################################
 # Build Docker Images for Testing
 ################################################################
-.docker:      &docker
-  stage:      docker
-  image:      docker:stable
-  tags:
-#    - docker
-    - Dedicated-Docker
+.docker:        &docker
+  stage:        docker
+  image:        docker:stable
+  tags:         [ Dedicated-Docker ]
   services:
     - docker:dind
   before_script:
@@ -87,3 +85,22 @@ php-8.0:
 
 pages:
     <<: *docker
+
+#################################################################
+## Build Documentation
+#################################################################
+build_pages:
+    image:      registry.gitlab.com/badpixxel-projects/php-sdk::pages
+    stage:      deploy
+    retry:      2
+    tags:       [ Dedicated ]
+    ################################################################################
+    # Run Test Script
+    script:
+        # Run Composer to Build Dependencies
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/composer.sh  | bash
+        # Build Documentation
+        - php vendor/bin/grumphp run --tasks=build-docs
+    artifacts:
+        paths:
+            - public
