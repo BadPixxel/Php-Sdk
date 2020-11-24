@@ -191,7 +191,7 @@ class DocumentationBuilder extends AbstractExternalTask
             $filesystem->remove($this->getTempDirectory());
             $filesystem->mkdir($this->getTempDirectory());
         } catch (IOExceptionInterface $exception) {
-            return "An error occurred while creating your directory at ".$exception->getPath();
+            return "An error occurred while creating your directory at ".$this->getTempDirectory();
         }
 
         return null;
