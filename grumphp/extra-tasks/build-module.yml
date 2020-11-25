@@ -4,6 +4,7 @@
 parameters:
     mod-enable:     true
     mod-src:        '/'
+    mod-target:     '/'
     mod-file:       "my-module.x.y.z"
 
 #############################################
@@ -16,5 +17,5 @@ grumphp:
             enabled:        "%mod-enable%"
             source_folder:  "%mod-src%"
             target_folder:  "/build"
-            build_folder:   ""
+            build_folder:   "%mod-target%"
             build_file:     "%mod-file%"
