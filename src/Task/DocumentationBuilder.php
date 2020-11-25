@@ -238,7 +238,12 @@ class DocumentationBuilder extends AbstractExternalTask
         //====================================================================//
         // Copy Local Contents
         try {
-            $filesystem->mirror($this->getLocalContentsDirectory(), $this->getTempDirectory());
+            $filesystem->mirror(
+                $this->getLocalContentsDirectory(),
+                $this->getTempDirectory(),
+                null,
+                array("override" => true)
+            );
         } catch (IOExceptionInterface $exception) {
             return "An error occurred while Local Contents copy at ".$exception->getPath();
         }
