@@ -14,7 +14,13 @@ layout: default
         </h2>
         
         <div class="intro">
-            <p>{{ site.description }}</p>
+            {% capture home_description %}{% include home/description.liquid %}{% endcapture %}
+            {% unless home_description contains "Liquid error" %}
+                {% include include home/description.liquid %}
+            {% else %}
+                <p>{{ site.description }}</p>
+            {% endunless %}
+
             {% include home/links.liquid %}
         </div>
 
