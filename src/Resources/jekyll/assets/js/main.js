@@ -111,6 +111,13 @@ $(document).ready(function() {
         html += '<p>' + $( this ).html() + '</p>';
         html += '</div></div></div>';
         $( this ).html(html);
-    });    
-    
+    });
+
+    /* Simple tables */
+    $("table").each(function( index ) {
+        if($(this).hasClass("datatable")) {
+            return;
+        }
+        $(this).addClass("table table-bordered table-dark table-hover table-sm text-center")
+    });
 });
