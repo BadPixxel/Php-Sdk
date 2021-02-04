@@ -6,6 +6,3 @@ grumphp:
         #############################################
         #   Composer Verifications
         composer: ~
-        #############################################
-        #   Symfony Security Checks
-        securitychecker: ~

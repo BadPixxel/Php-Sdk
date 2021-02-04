@@ -55,3 +55,4 @@
 /.gh-pages/
 /public/
 /src/Resources/jekyll/yarn.lock
+/src/Resources/jekyll/Gemfile.lock

@@ -327,7 +327,7 @@ class DocumentationBuilder extends AbstractExternalTask
                 $manifest = array("manifest" => Yaml::parseFile($this->getManifestPath()));
             }
         } catch (ParseException $exception) {
-            return "Unable to build Jekyll Configuration: " . $exception->getMessage();
+            return "Unable to build Jekyll Configuration: ".$exception->getMessage();
         }
         //====================================================================//
         // Build Final Configuration
