@@ -5,7 +5,7 @@ FROM php:7.4-apache-buster
 ################################################################
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 ca-certificates rsync subversion
+    && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 ca-certificates rsync subversion \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
