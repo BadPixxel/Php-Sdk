@@ -1,10 +1,13 @@
 FROM php:7.4-apache-buster
 
 ################################################################
-# Install Varions Tools
+# Install Various Tools
 ################################################################
 
-RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client  apt-utils iputils-ping systemd gnupg2
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 ca-certificates rsync subversion
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################
 # Install PHP Extensions
@@ -19,7 +22,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libz
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable mongodb \
     && docker-php-source delete \
-    && pecl clear-cache
+    && pecl clear-cache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 
 ################################################################
 # Configure Php
@@ -52,7 +58,9 @@ RUN echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc \
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt update && apt install yarn -y -q \
-    && yarn --version
+    && yarn --version \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################################
 # Install Jekyll
