@@ -44,7 +44,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 ################################################################################
 # Install Ruby Full
-RUN apt-get install ruby-full build-essential zlib1g-dev -y -q
+RUN apt-get update && apt-get install ruby-full build-essential zlib1g-dev -y -q \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################################
 # Install & Config Gems
