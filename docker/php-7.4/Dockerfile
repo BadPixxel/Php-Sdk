@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget d
 # Install PHP Extensions
 ################################################################
 
-# Zip Xml Soap Bcmath
+# Zip | Xml | Soap | Bcmath
+# Apcu | Mongodb | Gd | Imagick
 RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev \
     && pecl install apcu mongodb imagick \
     && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif \
