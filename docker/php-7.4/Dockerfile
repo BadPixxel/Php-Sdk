@@ -11,13 +11,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget d
 ################################################################
 
 # Zip Xml Soap Bcmath
-RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && pecl install apcu mongodb \
-    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl \
+RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev \
+    && pecl install apcu mongodb imagick \
+    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable mongodb \
+    && docker-php-ext-enable imagick \
     && docker-php-source delete \
     && pecl clear-cache
 
