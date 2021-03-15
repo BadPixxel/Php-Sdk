@@ -4,7 +4,7 @@ FROM php:7.4-apache-buster
 # Install Varions Tools
 ################################################################
 
-RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client  apt-utils iputils-ping systemd gnupg2
+RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client  apt-utils iputils-ping systemd gnupg2 unzip
 
 ################################################################
 # Install PHP Extensions
