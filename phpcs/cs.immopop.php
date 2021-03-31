@@ -18,6 +18,7 @@ include_once "headers/immopop.php";
 $finder = PhpCsFixer\Finder::create()
     ->in($_SERVER['PWD'])
     ->exclude('vendor')
+    ->exclude('node_modules')
     ->exclude('tests/Fixtures')
     ->exclude('var')
 ;
