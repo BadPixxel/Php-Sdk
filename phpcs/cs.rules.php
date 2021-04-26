@@ -13,7 +13,7 @@
 
 global $header, $finder;
 
-$config = PhpCsFixer\Config::create()
+$config = (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules(array(
         '@PSR2' => true,
