@@ -16,11 +16,18 @@ echo "----------------------------------------------------"
 echo "--> Grumphp Code Quality Tests Suite"
 echo "----------------------------------------------------"
 
+################################################################
+# Force Failure if ONE line Fails
+set -e
+
+################################################################
 # Grumphp Travis Testsuite
 php vendor/bin/grumphp run -n --testsuite=travis
 
+################################################################
 # Grumphp CsFixer Testsuite
 php vendor/bin/grumphp run -n --testsuite=csfixer
 
-# Grumphp Phpstan Testsuite
+################################################################
+# Grumphp Php Stan Testsuite
 php vendor/bin/grumphp run -n --testsuite=phpstan

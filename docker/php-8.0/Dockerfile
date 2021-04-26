@@ -11,11 +11,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget d
 ################################################################
 
 # Zip | Xml | Soap | Bcmath | Mbstring | Gd
-RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl \
+RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev libxslt-dev \
+    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif xsl sockets \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-source delete
+    && docker-php-source delete \
+    && pecl clear-cache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Apcu
 RUN mkdir -p /usr/src/php/ext/apcu \
