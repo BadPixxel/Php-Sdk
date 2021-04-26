@@ -95,19 +95,3 @@ $config = (new PhpCsFixer\Config())
     ))
     ->setFinder($finder)
 ;
-
-// special handling of fabbot.io service if it's using too old PHP CS Fixer version
-if (false !== getenv('FABBOT_IO')) {
-    try {
-        PhpCsFixer\FixerFactory::create()
-            ->registerBuiltInFixers()
-            ->registerCustomFixers($config->getCustomFixers())
-            ->useRuleSet(new PhpCsFixer\RuleSet($config->getRules()));
-    } catch (PhpCsFixer\ConfigurationException\InvalidConfigurationException $e) {
-        $config->setRules(array());
-    } catch (UnexpectedValueException $e) {
-        $config->setRules(array());
-    } catch (InvalidArgumentException $e) {
-        $config->setRules(array());
-    }
-}
