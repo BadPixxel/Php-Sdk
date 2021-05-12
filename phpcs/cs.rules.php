@@ -17,7 +17,6 @@ $config = (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules(array(
         '@PSR2' => true,
-        '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
