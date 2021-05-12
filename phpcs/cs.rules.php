@@ -53,7 +53,6 @@ $config = (new PhpCsFixer\Config())
             )
         ),
         'no_null_property_initialization' => true,
-        'no_short_echo_tag' => true,
         'no_superfluous_elseif' => true,
         'no_unneeded_curly_braces' => true,
         'no_unneeded_final_method' => true,
@@ -65,7 +64,6 @@ $config = (new PhpCsFixer\Config())
         'ordered_imports' => true,
         'php_unit_internal_class' => false,
         'php_unit_method_casing' => true,
-        'php_unit_ordered_covers' => true,
         'php_unit_set_up_tear_down_visibility' => true,
         'php_unit_strict' => false,
         'php_unit_test_annotation' => true,
