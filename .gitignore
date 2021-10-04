@@ -56,3 +56,4 @@
 /public/
 /src/Resources/jekyll/yarn.lock
 /src/Resources/jekyll/Gemfile.lock
+/.php-cs-fixer.cache
