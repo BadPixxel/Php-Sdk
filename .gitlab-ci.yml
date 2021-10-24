@@ -42,16 +42,8 @@ tests:php-7.4:
     image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4
     <<: *core_tests
 
-tests:php-7.4-slim:
-    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4-slim
-    <<: *core_tests
-
 tests:php-7.3:
     image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.3
-    <<: *core_tests
-
-tests:php-7.3-slim:
-    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.3-slim
     <<: *core_tests
 
 tests:php-7.2:
