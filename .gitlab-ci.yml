@@ -63,7 +63,7 @@ tests:php-7.2:
     - docker info
     # Install Docker Slim
     - apk add --no-cache curl
-    - curl -sL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh | bash
+    - curl -sL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh | sh
   script:
     - echo "[$CI_JOB_NAME] Build & Upload Docker Image"
     # Connect Docker to GitLab
