@@ -65,15 +65,21 @@ tests:php-7.2:
     - docker info
   script:
     - echo "[$CI_JOB_NAME] Build & Upload Docker Image"
+    ################################################################
     # Connect Docker to GitLab
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    ################################################################
     # Build & Upload Splash All Docker Images
     - docker build -t $IMAGE_TAG docker/$CI_JOB_NAME
     - docker push $IMAGE_TAG
-    # Execute Docker Slim
-    - docker run -e DOCKER_HOST=tcp://$(grep docker /etc/hosts | cut -f1):2375 dslim/docker-slim build "$IMAGE_TAG"
-    - docker tag "$CI_REGISTRY_IMAGE.slim" "$IMAGE_TAG-slim"
-    - docker push $IMAGE_TAG-slim
+    ################################################################
+    # Connect Docker to DockerHub
+    - docker login -u splashsync -p $DOCKER_HUB_TOKEN
+    ################################################################
+    # Build & Upload Splash All Docker Hub Images
+    - docker build -t splashsync/php-sdk:$CI_JOB_NAME docker/$CI_JOB_NAME
+    - docker push splashsync/php-sdk:$CI_JOB_NAME
+
   except:
     - schedules
   only:
