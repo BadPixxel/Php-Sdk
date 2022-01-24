@@ -316,9 +316,11 @@ class DocumentationBuilder extends AbstractExternalTask
         try {
             //====================================================================//
             // Load Generic Configuration
+            /** @var array $coreConfig */
             $coreConfig = Yaml::parseFile($this->getJekyllSrcDirectory().'/_config.yml');
             //====================================================================//
             // Load Local Configuration
+            /** @var array $localConfig */
             $localConfig = Yaml::parseFile($this->getLocalContentsDirectory().'/_config.yml');
             //====================================================================//
             // Load Module Splash Manifest

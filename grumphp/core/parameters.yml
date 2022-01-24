@@ -27,6 +27,6 @@ parameters:
     csfixer-config:     "%core_dir%/phpcs/cs.%mode%.php"
 
     # Php Stan
-    stan-level:          8
+    stan-level:          9
     stan-config:         "%core_dir%/phpstan/%mode%.neon"
     stan-exclude:        "%exclude%"

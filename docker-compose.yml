@@ -21,6 +21,16 @@ version: "3.5"
 services:
 
     ################################################################################
+    # PHP 8.1
+    php-8.1:
+        build:
+            context: ./docker/php-8.1
+        container_name: php81.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html
+            - vendor-php81:/var/www/html/vendor
+
+    ################################################################################
     # PHP 8.0
     php-8.0:
         build:
@@ -28,7 +38,7 @@ services:
         container_name: php80.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
-#        command:    "bash /var/www/html/docker/entrypoint.sh"
+            - vendor-php80:/var/www/html/vendor
 
     ################################################################################
     # PHP 7.4
@@ -38,7 +48,7 @@ services:
         container_name: php74.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
-#        command:    "bash /var/www/html/docker/entrypoint.sh"
+            - vendor-php74:/var/www/html/vendor
 
     ################################################################################
     # PHP 7.3
@@ -48,7 +58,7 @@ services:
         container_name: php73.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
-#        command:    "bash /var/www/html/docker/entrypoint.sh"
+            - vendor-php73:/var/www/html/vendor
 
     ################################################################################
     # PHP 7.2
@@ -58,4 +68,11 @@ services:
         container_name: php72.badpixxel.sdk.local
         volumes:
             - ./:/var/www/html
-#        command:    "bash /var/www/html/docker/entrypoint.sh"
+            - vendor-php72:/var/www/html/vendor
+
+volumes:
+    vendor-php81: ~
+    vendor-php80: ~
+    vendor-php74: ~
+    vendor-php73: ~
+    vendor-php72: ~
