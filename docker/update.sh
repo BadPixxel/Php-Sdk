@@ -28,6 +28,10 @@ echo "[PHP 8.0] Build & Upload Docker Image"
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0 docker/php-8.0
 docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
 
-echo "[PAGES] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:pages docker/pages
-docker push registry.gitlab.com/badpixxel-projects/php-sdk:pages
+echo "[PHP 8.1] Build & Upload Docker Image"
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0 docker/php-8.0
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
+
+echo "[JEKYLL] Build & Upload Docker Image"
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll docker/jekyll
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:jekyll

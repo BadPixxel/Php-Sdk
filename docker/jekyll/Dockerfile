@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster
+FROM php:8.0-apache
 
 ################################################################
 # Install Various Tools
@@ -14,20 +14,29 @@ RUN apt-get update \
 ################################################################
 
 # Zip | Xml | Soap | Bcmath
-# Apcu | Mongodb | Gd | Imagick
+# Gd | Imagick
 RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev libxslt-dev \
-    && pecl install apcu mongodb imagick \
+    && pecl install imagick \
     && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif xsl sockets \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-enable apcu \
-    && docker-php-ext-enable mongodb \
     && docker-php-ext-enable imagick \
     && docker-php-source delete \
     && pecl clear-cache \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+################################################################
+# Apcu
+RUN mkdir -p /usr/src/php/ext/apcu \
+    && curl -fsSL https://pecl.php.net/get/apcu | tar xvz -C "/usr/src/php/ext/apcu" --strip 1 \
+    && docker-php-ext-install apcu
+
+################################################################
+# Mongodb
+RUN mkdir -p /usr/src/php/ext/mongodb \
+    && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
+    && docker-php-ext-install mongodb
 
 ################################################################
 # Configure Php
