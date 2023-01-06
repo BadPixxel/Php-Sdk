@@ -28,6 +28,12 @@ then
   cp app/config/parameters.yml.dist app/config/parameters.yml
 fi;
 
+if [ -f "config/packages/parameters.yaml.dist" ];
+then
+  echo "Symfony => Configuring Parameters"
+  cp config/packages/parameters.yaml.dist config/packages/parameters.yaml
+fi;
+
 if [ -f ".env.dist" ];
 then
   echo "Symfony => Configuring DotEnv"
