@@ -34,11 +34,12 @@ RUN php -m
 RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
 
 ################################################################
-# Install Composer
+# Install Wall-E
+# + Install Composer
 ################################################################
 
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && php -r "unlink('composer-setup.php');"
+RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/main/bin/wall-e.phar?raw=true', '/usr/local/bin/wall-e');" \
+    && chmod +x /usr/local/bin/wall-e \
+    && wall-e add:composer
 
 WORKDIR /var/www/html
