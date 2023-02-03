@@ -130,7 +130,6 @@ class DocumentationBuilder extends AbstractExternalTask
         //====================================================================//
         // Initialize Empty Local Class for Splash Modules
         SplashFaker::init();
-        ;
 
         //====================================================================//
         // Init Module Build Directory

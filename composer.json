@@ -54,10 +54,6 @@
       "phpstan/phpstan-strict-rules":         "^1.0"
   },
 
-  "require-dev": {
-      "badpixxel/php-cli":                    "dev-main"
-  },
-
   "archive": {
       "exclude": ["/docs"]
   },
