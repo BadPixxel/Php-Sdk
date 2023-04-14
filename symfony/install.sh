@@ -19,9 +19,6 @@ echo "----------------------------------------------------"
 echo "Symfony => Build Dependencies"
 composer update  --prefer-dist --no-interaction  --no-progress
 
-echo "Symfony => Create Database"
-php bin/console doctrine:database:create
-
 echo "Symfony => Configure Database"
 php bin/console doctrine:schema:update --force  --no-interaction --no-debug
 
