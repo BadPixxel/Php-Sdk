@@ -63,7 +63,7 @@ tests:php-7.4:
     - echo "[$CI_JOB_NAME] Build & Upload Docker Image"
     ################################################################
     # Connect Docker to GitLab
-    - docker login registry.gitlab.com --username gitlab-ci-token --password $CI_BUILD_TOKEN
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     ################################################################
     # Build & Upload Splash All Docker Images
     - docker build -t $IMAGE_TAG docker/$CI_JOB_NAME
