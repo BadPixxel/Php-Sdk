@@ -1,10 +1,10 @@
-FROM php:7.2-apache-stretch
+FROM php:7.2-apache
 
 ################################################################
 # Install Varions Tools
 ################################################################
 
-RUN apt-get update && apt-get install --no-install-recommends -y git curl wget mysql-client  apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup
+RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup
 
 ################################################################
 # Install PHP Extensions

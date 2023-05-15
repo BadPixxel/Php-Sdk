@@ -32,6 +32,10 @@ echo "[PHP 8.1] Build & Upload Docker Image"
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1 docker/php-8.1
 docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
 
+echo "[PHP 8.2] Build & Upload Docker Image"
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2 docker/php-8.2
+docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
+
 echo "[JEKYLL] Build & Upload Docker Image"
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll docker/jekyll
 docker push registry.gitlab.com/badpixxel-projects/php-sdk:jekyll

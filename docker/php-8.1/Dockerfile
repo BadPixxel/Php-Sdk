@@ -27,6 +27,15 @@ RUN mkdir -p /usr/src/php/ext/apcu \
     && docker-php-ext-install apcu
 
 ################################################################
+# Imagick
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+    && printf "\n" | pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && docker-php-source delete \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+################################################################
 # Mongodb
 RUN mkdir -p /usr/src/php/ext/mongodb \
     && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
