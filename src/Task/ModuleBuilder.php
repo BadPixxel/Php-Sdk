@@ -16,7 +16,6 @@ namespace BadPixxel\PhpSdk\Task;
 use BadPixxel\PhpSdk\Helper\Composer;
 use BadPixxel\PhpSdk\Helper\SplashFaker;
 use BadPixxel\PhpSdk\Helper\ZipBuilder;
-use GrumPHP\Configuration\GrumPHP;
 use GrumPHP\Formatter\ProcessFormatterInterface as Formater;
 use GrumPHP\Process\ProcessBuilder;
 use GrumPHP\Runner\TaskResult;

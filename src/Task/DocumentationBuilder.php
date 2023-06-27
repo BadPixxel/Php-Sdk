@@ -15,7 +15,6 @@ namespace BadPixxel\PhpSdk\Task;
 
 use BadPixxel\PhpSdk\Helper\ShellRunner;
 use BadPixxel\PhpSdk\Helper\SplashFaker;
-use GrumPHP\Configuration\GrumPHP;
 use GrumPHP\Formatter\ProcessFormatterInterface as Formater;
 use GrumPHP\Process\ProcessBuilder;
 use GrumPHP\Runner\TaskResult;

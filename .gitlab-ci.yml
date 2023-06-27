@@ -34,6 +34,10 @@ stages:
         # Run After Script
         - cat ci/after.sh | sh
 
+tests:php-8.2:
+    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
+    <<: *core_tests
+
 tests:php-8.1:
     image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
     <<: *core_tests
@@ -96,6 +100,9 @@ php-8.0:
 
 php-8.1:
     <<: *docker
+
+php-8.2:
+  <<: *docker
 
 jekyll:
     <<: *docker
