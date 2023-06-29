@@ -21,8 +21,8 @@ echo "----------------------------------------------------"
 if ! command -v composer &> /dev/null
 then
   echo "Composer => Installation Required"
-  #  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  wget https://getcomposer.org/installer -q -O composer-setup.php
+  echo "allow_url_fopen=On" >> /usr/local/etc/php/php.ini
+  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   php -r "unlink('composer-setup.php');"
 fi
