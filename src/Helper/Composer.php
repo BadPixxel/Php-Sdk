@@ -86,6 +86,7 @@ class Composer
             "--quiet" => true,
             "--no-interaction" => true,
         );
+
         //====================================================================//
         // Merge with User Options
         return (array) array_replace_recursive($baseOptions, $options);

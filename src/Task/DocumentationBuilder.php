@@ -183,6 +183,7 @@ class DocumentationBuilder extends AbstractExternalTask
     private function initDirectory(): ?string
     {
         $filesystem = new Filesystem();
+
         //====================================================================//
         // Init Module Build Directory
         try {
@@ -352,6 +353,7 @@ class DocumentationBuilder extends AbstractExternalTask
         if (!is_dir($siteDir)) {
             return "Unable to find Final Site at ".$siteDir;
         }
+
         //====================================================================//
         // Copy Jekyll Base Contents
         try {

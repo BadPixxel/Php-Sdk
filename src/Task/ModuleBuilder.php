@@ -165,6 +165,7 @@ class ModuleBuilder extends AbstractExternalTask
     private function initDirectory(): ?string
     {
         $filesystem = new Filesystem();
+
         //====================================================================//
         // Init Module Build Directory
         try {
@@ -201,6 +202,7 @@ class ModuleBuilder extends AbstractExternalTask
             if (!$filesystem->exists($composerPath)) {
                 return "Unable to find composer.json at ".$composerPath;
             }
+
             //====================================================================//
             // Copy Module Contents
             try {
