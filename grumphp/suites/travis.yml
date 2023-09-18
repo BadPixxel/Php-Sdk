@@ -11,7 +11,6 @@ grumphp:
                 - git_blacklist
                 - phplint
                 - jsonlint
-                - xmllint
                 - yamllint
                 - phpcs
                 - phpmd

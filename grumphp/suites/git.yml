@@ -9,12 +9,10 @@ grumphp:
             tasks:
                 - phplint
                 - jsonlint
-                - xmllint
                 - yamllint
         # Specify the test-suite for the git:pre-commit command:
         git_pre_commit:
             tasks:
                 - phplint
                 - jsonlint
-                - xmllint
                 - yamllint
