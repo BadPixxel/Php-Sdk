@@ -16,4 +16,5 @@ echo "----------------------------------------------------"
 echo "--> TOOLKIT - Execute PHPUNIT Tests"
 echo "----------------------------------------------------"
 
-docker-compose exec -T toolkit php vendor/bin/phpunit
+docker-compose exec -T toolkit php vendor/bin/phpunit --log-junit test-report.xml
+docker-compose exec -T toolkit cat test-report.xml >> $CI_PROJECT_DIR/test-report.xml
