@@ -28,6 +28,10 @@ variables:
   SYMFONY_DEPRECATIONS_HELPER:  disabled
 
 ################################################################
+# Define Default Image
+image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
+
+################################################################
 # Defined Pipeline Stages
 stages:
   - Quality
