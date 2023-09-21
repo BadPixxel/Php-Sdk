@@ -23,7 +23,7 @@
 # Build Splash Manifests
 ################################################################
 manifests:
-    stage:      Deploy
+    stage:      Builds
     tags:       [ Dedicated ]
     before_script:
         ################################################################################
