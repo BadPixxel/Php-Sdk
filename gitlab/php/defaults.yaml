@@ -75,6 +75,7 @@ stages:
 .functional:
     <<: *base
     stage:      Functional
+    retry:      2
     ################################################################################
     # Run Test Script
     script:
