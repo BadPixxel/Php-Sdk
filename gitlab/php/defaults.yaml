@@ -81,10 +81,6 @@ stages:
         # Execute Phpunit Test Suite
         - php vendor/bin/phpunit --log-junit $CI_PROJECT_DIR/full-report.xml
     ################################################################################
-    # Run After Script
-    after_script:
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/after.sh  | bash
-    ################################################################################
     # Job Artefacts
     artifacts:
         when: always
@@ -99,10 +95,6 @@ stages:
     script:
       # Execute Phpunit Test Suite
       - php vendor/bin/phpunit --testsuite Local --log-junit $CI_PROJECT_DIR/local-report.xml
-    ################################################################################
-    # Run After Script
-    after_script:
-      - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/after.sh  | bash
     ################################################################################
     # Job Artefacts
     artifacts:
