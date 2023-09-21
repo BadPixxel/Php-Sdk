@@ -87,6 +87,8 @@ stages:
         reports:
             junit: "$CI_PROJECT_DIR/*-report.xml"
 
+################################################################
+# Functional Tests - Only with Local Tests Suite
 .functional-local:
     <<: *base
     stage:      Functional
@@ -101,3 +103,17 @@ stages:
         when: always
         reports:
             junit: "$CI_PROJECT_DIR/*-report.xml"
+
+################################################################
+# Functional Tests - With Local WebServer
+.functional-web:
+    extends:    .functional
+    ################################################################################
+    # Run Test Script
+    script:
+        # Install Symfony CLI
+        - wall-e add:symfony
+        # Start Web Server
+        - symfony serve -d
+        # Execute PhpUnit Tests
+        - vendor/bin/phpunit --log-junit $CI_PROJECT_DIR/full-report.xml
