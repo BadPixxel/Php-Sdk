@@ -54,7 +54,7 @@ stages:
 # Quality Tests
 ################################################################
 
-.quality:    &quality
+.quality:
     <<: *base
     stage:      Quality
     ################################################################################
@@ -68,7 +68,7 @@ stages:
 # Functional Tests
 ################################################################
 
-.functional:    &functional
+.functional:
     <<: *base
     stage:      Functional
     ################################################################################
@@ -80,6 +80,25 @@ stages:
     # Run After Script
     after_script:
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/after.sh  | bash
+    ################################################################################
+    # Job Artefacts
+    artifacts:
+        when: always
+        reports:
+            junit: "$CI_PROJECT_DIR/*-report.xml"
+
+.functional-local:
+    <<: *base
+    stage:      Functional
+    ################################################################################
+    # Run Test Script
+    script:
+      # Execute Phpunit Test Suite
+      - php vendor/bin/phpunit --testsuite Local --log-junit $CI_PROJECT_DIR/local-report.xml
+    ################################################################################
+    # Run After Script
+    after_script:
+      - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/after.sh  | bash
     ################################################################################
     # Job Artefacts
     artifacts:
