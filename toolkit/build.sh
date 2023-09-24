@@ -17,10 +17,16 @@ echo "--> TOOLKIT - Install Docker Compose & Start Container"
 echo "----------------------------------------------------"
 
 echo "Docker => Git & Docker Compose"
-apk add --no-cache git curl bash docker-compose
+apk add --no-cache curl bash git  docker-compose
 
 echo "Docker => Init Logs Dir"
 mkdir logs
+
+if [ -f ".env.dist" ];
+then
+  echo "Docker => Init Environment from .env.dist"
+  cp .env.dist .env
+fi;
 
 echo "Docker => Start Docker Compose"
 docker network create splashsync --attachable
