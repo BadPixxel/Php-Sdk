@@ -17,7 +17,7 @@ echo "--> TOOLKIT - Install Docker Compose & Start Container"
 echo "----------------------------------------------------"
 
 echo "Docker => Git & Docker Compose"
-apk add --no-cache git docker-compose
+apk add --no-cache git curl bash docker-compose
 
 echo "Docker => Init Logs Dir"
 mkdir logs
