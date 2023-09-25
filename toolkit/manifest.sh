@@ -18,5 +18,5 @@ echo "----------------------------------------------------"
 
 mkdir manifest
 docker-compose exec -T toolkit php bin/console splash:server:manifest
-docker-compose exec -T toolkit cat splash.json >> manifest/splash.json
-docker-compose exec -T toolkit cat splash.yml >> manifest/splash.yml
+docker cp "$(docker-compose ps -q toolkit)":/app/splash.json  manifest/splash.json
+docker cp "$(docker-compose ps -q toolkit)":/app/splash.yml   manifest/splash.yml
