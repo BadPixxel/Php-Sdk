@@ -18,4 +18,4 @@ echo "----------------------------------------------------"
 
 mkdir reports
 docker-compose exec -T toolkit php vendor/bin/phpunit --log-junit test-report.xml
-docker cp "$(docker-compose ps -q toolkit)":/app/test-report.xml  reports/test-report.xml
+docker cp "$(docker-compose ps -q toolkit)":/app/test-report.xml  $CI_PROJECT_DIR/reports/test-report.xml
