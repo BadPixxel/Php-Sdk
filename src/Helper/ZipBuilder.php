@@ -49,7 +49,7 @@ class ZipBuilder
         //====================================================================//
         // Create the archive
         $zip = new ZipArchive();
-        if (true !== $zip->open($targetFile, ZIPARCHIVE::CREATE)) {
+        if (true !== $zip->open($targetFile, ZipArchive::CREATE)) {
             return "Unable to Create Zip Archive: ".$targetFile;
         }
 
