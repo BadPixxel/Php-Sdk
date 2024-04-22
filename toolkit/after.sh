@@ -16,6 +16,6 @@ echo "----------------------------------------------------"
 echo "--> TOOLKIT - After Script"
 echo "----------------------------------------------------"
 
-docker-compose stop
-docker-compose logs --tail="50"
-docker-compose logs --tail="2000" >> logs/docker.txt
+docker compose stop
+docker compose logs --tail="50"
+docker compose logs --tail="2000" >> logs/docker.txt

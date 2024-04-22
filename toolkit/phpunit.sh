@@ -17,5 +17,7 @@ echo "--> TOOLKIT - Execute PHPUNIT Tests"
 echo "----------------------------------------------------"
 
 mkdir reports
-docker-compose exec -T toolkit php vendor/bin/phpunit --log-junit test-report.xml
-docker cp "$(docker-compose ps -q toolkit)":/app/test-report.xml  "$(pwd)"/reports/test-report.xml
+docker compose exec -T toolkit php vendor/bin/phpunit --log-junit test-report.xml
+docker cp "$(docker compose ps -q toolkit)":/app/test-report.xml  "$(pwd)"/reports/test-report.xml
+
+echo "Test Reports exported to $(pwd)/reports"

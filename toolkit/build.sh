@@ -13,11 +13,11 @@
 ################################################################################
 
 echo "----------------------------------------------------"
-echo "--> TOOLKIT - Install Docker Compose & Start Container"
+echo "--> TOOLKIT - Start Docker Compose"
 echo "----------------------------------------------------"
 
-echo "Docker => Git & Docker Compose"
-apk add --no-cache git  docker-compose
+echo "Docker => Git"
+apk add --no-cache git
 
 echo "Docker => Init Logs Dir"
 mkdir logs
@@ -30,4 +30,4 @@ fi;
 
 echo "Docker => Start Docker Compose"
 docker network create splashsync --attachable
-docker-compose up -d
+docker compose up -d --quiet-pull

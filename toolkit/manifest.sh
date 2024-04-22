@@ -17,6 +17,8 @@ echo "--> TOOLKIT - Build Splash Manifest"
 echo "----------------------------------------------------"
 
 mkdir manifest
-docker-compose exec -T toolkit php bin/console splash:server:manifest
-docker cp "$(docker-compose ps -q toolkit)":/app/splash.json  "$(pwd)"/manifest/splash.json
-docker cp "$(docker-compose ps -q toolkit)":/app/splash.yml   "$(pwd)"/manifest/splash.yml
+docker compose exec -T toolkit php bin/console splash:server:manifest
+docker cp "$(docker compose ps -q toolkit)":/app/splash.json  "$(pwd)"/manifest/splash.json
+docker cp "$(docker compose ps -q toolkit)":/app/splash.yml   "$(pwd)"/manifest/splash.yml
+
+echo "Manifests exported to $(pwd)/manifest"
