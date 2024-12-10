@@ -26,6 +26,9 @@ then
   php -r "unlink('composer-setup.php');"
 fi
 
+echo "Composer => Force Grumphp from Sources"
+composer remove  phpro/grumphp-shim --no-update --no-interaction --no-progress
+composer require phpro/grumphp:^2.0 --no-update --no-interaction --no-progress
 
 echo "Composer => Update"
 composer update  --prefer-dist --no-interaction --no-progress
