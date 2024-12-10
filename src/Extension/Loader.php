@@ -33,6 +33,16 @@ class Loader implements ExtensionInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function imports(): iterable
+    {
+        $configDir = dirname(__DIR__).'/Resources/config';
+
+        yield $configDir.'/tasks.yaml';
+    }
+
+    /**
      * @param ContainerBuilder $container
      * @param string           $className
      * @param string           $taskName

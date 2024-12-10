@@ -20,6 +20,7 @@ use GrumPHP\Process\ProcessBuilder;
 use GrumPHP\Runner\TaskResult;
 use GrumPHP\Runner\TaskResultInterface;
 use GrumPHP\Task\AbstractExternalTask;
+use GrumPHP\Task\Config\ConfigOptionsResolver;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
@@ -35,19 +36,19 @@ use Symfony\Component\Yaml\Yaml;
  *
  * Generate Static Documentation Website for Github|Gitlab Pages
  *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @extends AbstractExternalTask<Formater>
  */
 class DocumentationBuilder extends AbstractExternalTask
 {
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * @var Paths
      */
-    private $paths;
+    private Paths $paths;
 
     /**
      * @param ProcessBuilder $processBuilder
@@ -70,9 +71,9 @@ class DocumentationBuilder extends AbstractExternalTask
     }
 
     /**
-     * @return OptionsResolver
+     * @return ConfigOptionsResolver
      */
-    public static function getConfigurableOptions(): OptionsResolver
+    public static function getConfigurableOptions(): ConfigOptionsResolver
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults(
@@ -100,7 +101,9 @@ class DocumentationBuilder extends AbstractExternalTask
         $resolver->addAllowedTypes('generic_folder', array('array'));
         $resolver->addAllowedTypes('generic_contents', array('array'));
 
-        return $resolver;
+        return ConfigOptionsResolver::fromClosure(
+            static fn (array $options): array => $resolver->resolve($options)
+        );
     }
 
     /**

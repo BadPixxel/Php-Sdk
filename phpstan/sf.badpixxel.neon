@@ -16,12 +16,11 @@ includes:
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-doctrine/extension.neon
 parameters:
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     inferPrivatePropertyTypeFromConstructor: true
     universalObjectCratesClasses:
         - ArrayObject
     ignoreErrors:
+        - identifier: missingType.iterableValue
         - "#Casting to string something that's already string.#"
     symfony:
         container_xml_path: %currentWorkingDirectory%/var/cache/dev/testContainer.xml # or srcDevDebugProjectContainer.xml for Symfony 4+

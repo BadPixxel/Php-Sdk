@@ -26,8 +26,8 @@ class ZipBuilder
     /**
      * Build Module Archive
      *
-     * @param string $targetFile
-     * @param array  $sources
+     * @param string   $targetFile
+     * @param string[] $sources
      *
      * @return null|string
      */

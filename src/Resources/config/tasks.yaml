@@ -1,0 +1,20 @@
+
+services:
+
+    BadPixxel\PhpSdk\Task\ModuleBuilder:
+        class:    BadPixxel\PhpSdk\Task\ModuleBuilder
+        arguments:
+            - '@process_builder'
+            - '@formatter.raw_process'
+            - '@GrumPHP\Util\Paths'
+        tags:
+            - { name: grumphp.task, task: build-module }
+
+    BadPixxel\PhpSdk\Task\DocumentationBuilder:
+        class:    BadPixxel\PhpSdk\Task\DocumentationBuilder
+        arguments:
+            - '@process_builder'
+            - '@formatter.raw_process'
+            - '@GrumPHP\Util\Paths'
+        tags:
+            - { name: grumphp.task, task: build-docs }

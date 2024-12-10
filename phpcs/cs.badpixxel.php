@@ -15,8 +15,11 @@ global $config, $finder;
 
 include_once "headers/badpixxel.php";
 
+/** @var string $pwd */
+$pwd = $_SERVER['PWD'];
+
 $finder = PhpCsFixer\Finder::create()
-    ->in($_SERVER['PWD'])
+    ->in($pwd)
     ->exclude('vendor')
     ->exclude('tests/Fixtures')
     ->exclude('var')
