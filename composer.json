@@ -46,9 +46,6 @@
         "phpstan/phpstan-symfony":              "^2.0",
         "phpstan/phpstan-strict-rules":         "^2.0"
     },
-    "require-dev": {
-        "phpro/grumphp":                        "^2.0"
-    },
 
     "archive": {
         "exclude": ["/docs"]
