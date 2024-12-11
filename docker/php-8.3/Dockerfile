@@ -1,13 +1,10 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 ################################################################
 # Install Varions Tools
 ################################################################
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup
 
 ################################################################
 # Install PHP Extensions
@@ -30,14 +27,13 @@ RUN mkdir -p /usr/src/php/ext/apcu \
     && docker-php-ext-install apcu
 
 ################################################################
-# Imagick
-RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
-    && printf "\n" | pecl install imagick \
-    && docker-php-ext-enable imagick \
-    && docker-php-source delete \
-    && apt-get clean \
-    && pecl clear-cache \
-    && rm -rf /var/lib/apt/lists/*
+# Imagick - Incompatible with PHP 8.3 Currently
+#RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+#    && printf "\n" | pecl install imagick \
+#    && docker-php-ext-enable imagick \
+#    && docker-php-source delete \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
 
 ################################################################
 # Mongodb

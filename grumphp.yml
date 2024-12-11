@@ -16,6 +16,9 @@
 parameters:
     core_dir:               "./"
 
+    # For Building The Module
+    mod-src:            '/src'
+
 #############################################        
 # Import Config. from Php Core Module
 imports:
