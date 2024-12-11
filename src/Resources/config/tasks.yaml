@@ -1,6 +1,10 @@
 
 services:
 
+    _defaults:
+        autowire:   true
+        autoconfigure: true
+
     BadPixxel\PhpSdk\Task\ModuleBuilder:
         class:    BadPixxel\PhpSdk\Task\ModuleBuilder
         arguments:

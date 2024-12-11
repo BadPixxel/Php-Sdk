@@ -22,17 +22,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class Loader implements ExtensionInterface
 {
     /**
-     * @param ContainerBuilder $container
-     *
-     * @return void
-     */
-    public function load(ContainerBuilder $container): void
-    {
-        $this->addTask($container, ModuleBuilder::class, 'build-module');
-        $this->addTask($container, DocumentationBuilder::class, 'build-docs');
-    }
-
-    /**
      * @inheritDoc
      */
     public function imports(): iterable
@@ -40,22 +29,5 @@ class Loader implements ExtensionInterface
         $configDir = dirname(__DIR__).'/Resources/config';
 
         yield $configDir.'/tasks.yaml';
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param string           $className
-     * @param string           $taskName
-     *
-     * @return void
-     */
-    private function addTask(ContainerBuilder $container, $className, $taskName)
-    {
-        $container->register($className, $className)
-            ->addArgument(new Reference('process_builder'))
-            ->addArgument(new Reference('formatter.raw_process'))
-            ->addArgument(new Reference('GrumPHP\Util\Paths'))
-            ->addTag('grumphp.task', array('task' => $taskName))
-        ;
     }
 }

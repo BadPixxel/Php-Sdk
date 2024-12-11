@@ -20,3 +20,8 @@ grumphp:
         failed:     "%core_dir%/grumphp/ascii/fail.txt"
         succeeded:  "%core_dir%/grumphp/ascii/passed.txt"
     process_timeout: 180
+
+    # Disable Parallel Processing (Incompatible with Grumphp-shim)
+    parallel:
+        enabled: false
+
