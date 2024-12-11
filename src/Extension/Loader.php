@@ -13,11 +13,7 @@
 
 namespace BadPixxel\PhpSdk\Extension;
 
-use BadPixxel\PhpSdk\Task\DocumentationBuilder;
-use BadPixxel\PhpSdk\Task\ModuleBuilder;
 use GrumPHP\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 class Loader implements ExtensionInterface
 {
