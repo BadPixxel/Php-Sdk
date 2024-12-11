@@ -7,7 +7,7 @@ FROM php:8.2-apache
 RUN apt-get update \
     && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################
 # Install PHP Extensions
@@ -45,6 +45,8 @@ RUN mkdir -p /usr/src/php/ext/mongodb \
     && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
     && docker-php-ext-install mongodb
 
+RUN php -m
+
 ################################################################
 # Configure Php
 ################################################################
@@ -59,7 +61,5 @@ RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
 RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/main/bin/wall-e.phar?raw=true', '/usr/local/bin/wall-e');" \
     && chmod +x /usr/local/bin/wall-e \
     && wall-e add:composer
-
-RUN php -m
 
 WORKDIR /var/www/html

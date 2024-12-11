@@ -4,7 +4,10 @@ FROM php:8.0-apache
 # Install Varions Tools
 ################################################################
 
-RUN apt-get update && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y git curl wget default-mysql-client apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################
 # Install PHP Extensions
@@ -12,7 +15,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y git curl wget d
 
 ################################################################
 # Zip | Xml | Soap | Bcmath | Mbstring | Gd
-RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev libxslt-dev \
+RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libssl-dev libxslt-dev \
     && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif xsl sockets ftp \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
