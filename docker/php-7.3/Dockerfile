@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommen
 RUN pecl install mongodb-1.16.2 \
     && docker-php-ext-enable mongodb \
     && docker-php-source delete \
-    && pecl clear-cache \
+    && pecl clear-cache
 
 RUN php -m
 
