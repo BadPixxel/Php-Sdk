@@ -38,6 +38,12 @@ stages:
         # Run After Script
         - cat ci/after.sh | sh
 
+tests:php-8.4:
+    image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4
+    <<: *core_tests
+    variables:
+        PHP_CS_FIXER_IGNORE_ENV: 1
+
 tests:php-8.3:
     image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3
     <<: *core_tests
@@ -108,6 +114,9 @@ php-8.2:
 php-8.3:
   <<: *docker
 
+php-8.4:
+  <<: *docker
+
 jekyll:
     <<: *docker
 
@@ -118,22 +127,6 @@ jekyll-7.4:
 #################################################################
 ## Build Documentation
 #################################################################
-#pages:
-#    image:      registry.gitlab.com/badpixxel-projects/php-sdk:jekyll
-#    stage:      Builds
-#    retry:      2
-#    tags:       [ Dedicated ]
-#    ################################################################################
-#    # Run Test Script
-#    script:
-#        # Run Composer to Build Dependencies
-#        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/composer.sh  | bash
-#        # Build Documentation
-#        - php vendor/bin/grumphp run --tasks=build-docs
-#    artifacts:
-#        paths:
-#            - public
-
 pages:
     image:      jekyll/jekyll:latest
     stage:      Builds

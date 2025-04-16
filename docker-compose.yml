@@ -16,9 +16,29 @@
 # Docker Compose File
 ################################################################################
 
-version: "3.5"
-
 services:
+
+    ################################################################################
+    # PHP 8.4
+    php-8.4:
+        build:
+            context: ./docker/php-8.4
+        container_name: php84.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html
+            - vendor-php84:/var/www/html/vendor
+        environment:
+            PHP_CS_FIXER_IGNORE_ENV: 1
+
+    ################################################################################
+    # PHP 8.3
+    php-8.3:
+        build:
+            context: ./docker/php-8.3
+        container_name: php83.badpixxel.sdk.local
+        volumes:
+            - ./:/var/www/html
+            - vendor-php83:/var/www/html/vendor
 
     ################################################################################
     # PHP 8.2
@@ -81,6 +101,8 @@ services:
             - vendor-php72:/var/www/html/vendor
 
 volumes:
+    vendor-php84: ~
+    vendor-php83: ~
     vendor-php82: ~
     vendor-php81: ~
     vendor-php80: ~

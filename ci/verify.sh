@@ -20,12 +20,13 @@ set -e
 
 ################################################################################
 # Docker Compose Container you want to check
-CONTAINERS="php-8.2,php-8.1,php-8.0,php-7.4,php-7.3,php-7.2"
+CONTAINERS="php-8.3,php-8.2,php-8.1"
+#CONTAINERS="php-8.4,php-8.3,php-8.2,php-8.1"
 
 ################################################################################
 # Start Docker Compose Stack
 echo '===> Start Docker Stack'
-docker-compose up -d
+docker compose up -d
 
 ######################################
 # Walk on Docker Compose Container
@@ -34,8 +35,10 @@ do
     echo "----------------------------------------------------"
     echo "===> CHECKS ON $ID"
     echo "----------------------------------------------------"
-    docker-compose exec $ID composer update -q || docker-compose exec $ID composer update
-    docker-compose exec $ID php vendor/bin/grumphp run --testsuite=travis
-    docker-compose exec $ID php vendor/bin/grumphp run --testsuite=csfixer
-    docker-compose exec $ID php vendor/bin/grumphp run --testsuite=phpstan
+    docker compose exec $ID composer remove phpro/grumphp-shim --no-update --no-interaction --no-progress
+    docker compose exec $ID composer require phpro/grumphp:^2.0 --no-update --no-interaction --no-progress
+    docker compose exec $ID composer update -q || docker compose exec $ID composer update
+    docker compose exec $ID php vendor/bin/grumphp run --testsuite=travis
+    docker compose exec $ID php vendor/bin/grumphp run --testsuite=csfixer
+    docker compose exec $ID php vendor/bin/grumphp run --testsuite=phpstan
 done
