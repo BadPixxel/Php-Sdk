@@ -41,11 +41,10 @@ RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommen
 
 ################################################################
 # Mongodb
-RUN mkdir -p /usr/src/php/ext/mongodb \
-    && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
-    && docker-php-ext-install mongodb
-
-RUN php -m
+RUN pecl install mongodb-1.20.1 \
+    && docker-php-ext-enable mongodb \
+    && docker-php-source delete \
+    && pecl clear-cache
 
 ################################################################
 # Configure Php
@@ -61,5 +60,7 @@ RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
 RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/main/bin/wall-e.phar?raw=true', '/usr/local/bin/wall-e');" \
     && chmod +x /usr/local/bin/wall-e \
     && wall-e add:composer
+
+RUN php -m
 
 WORKDIR /var/www/html

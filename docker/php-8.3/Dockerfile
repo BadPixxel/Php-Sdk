@@ -27,19 +27,20 @@ RUN mkdir -p /usr/src/php/ext/apcu \
     && docker-php-ext-install apcu
 
 ################################################################
-# Imagick - Incompatible with PHP 8.3 Currently
-#RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
-#    && printf "\n" | pecl install imagick \
-#    && docker-php-ext-enable imagick \
-#    && docker-php-source delete \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/*
+# Imagick
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+    && printf "\n" | pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && docker-php-source delete \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################
 # Mongodb
-RUN mkdir -p /usr/src/php/ext/mongodb \
-    && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
-    && docker-php-ext-install mongodb
+RUN pecl install mongodb-1.20.1 \
+    && docker-php-ext-enable mongodb \
+    && docker-php-source delete \
+    && pecl clear-cache \
 
 ################################################################
 # Configure Php

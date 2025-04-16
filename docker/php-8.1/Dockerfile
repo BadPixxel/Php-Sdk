@@ -37,9 +37,10 @@ RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommen
 
 ################################################################
 # Mongodb
-RUN mkdir -p /usr/src/php/ext/mongodb \
-    && curl -fsSL https://pecl.php.net/get/mongodb | tar xvz -C "/usr/src/php/ext/mongodb" --strip 1 \
-    && docker-php-ext-install mongodb
+RUN pecl install mongodb-1.20.1 \
+    && docker-php-ext-enable mongodb \
+    && docker-php-source delete \
+    && pecl clear-cache
 
 ################################################################
 # Configure Php

@@ -40,8 +40,6 @@ RUN pecl install mongodb-1.16.2 \
     && docker-php-source delete \
     && pecl clear-cache
 
-RUN php -m
-
 ################################################################
 # Configure Php
 ################################################################
@@ -55,5 +53,7 @@ RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
     && php -r "unlink('composer-setup.php');"
+
+RUN php -m
 
 WORKDIR /var/www/html
