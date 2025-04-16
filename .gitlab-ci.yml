@@ -55,6 +55,7 @@ tests:php-7.4:
 ################################################################
 .docker:        &docker
   stage:        docker
+  when:         manual
   image:        docker:stable
   tags:         [ Dedicated-Docker ]
   services:
