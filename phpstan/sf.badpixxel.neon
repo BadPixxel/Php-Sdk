@@ -1,6 +1,6 @@
 ################################################################################
 #
-# Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+# Copyright (C) BadPixxel <www.badpixxel.com>
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,4 +23,4 @@ parameters:
         - identifier: missingType.iterableValue
         - "#Casting to string something that's already string.#"
     symfony:
-        container_xml_path: %currentWorkingDirectory%/var/cache/dev/testContainer.xml # or srcDevDebugProjectContainer.xml for Symfony 4+
+        containerXmlPath: %currentWorkingDirectory%/var/cache/dev/testContainer.xml
