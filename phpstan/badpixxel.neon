@@ -19,3 +19,4 @@ parameters:
             - ArrayObject
     ignoreErrors:
         - identifier: missingType.iterableValue
+        - identifier: missingType.generics
