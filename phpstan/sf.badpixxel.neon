@@ -1,6 +1,6 @@
 ################################################################################
 #
-# Copyright (C) 2020 BadPixxel <www.badpixxel.com>
+# Copyright (C) BadPixxel <www.badpixxel.com>
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,12 +16,11 @@ includes:
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-doctrine/extension.neon
 parameters:
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     inferPrivatePropertyTypeFromConstructor: true
     universalObjectCratesClasses:
         - ArrayObject
     ignoreErrors:
+        - identifier: missingType.iterableValue
         - "#Casting to string something that's already string.#"
     symfony:
         container_xml_path: %currentWorkingDirectory%/var/cache/dev/testContainer.xml # or srcDevDebugProjectContainer.xml for Symfony 4+
