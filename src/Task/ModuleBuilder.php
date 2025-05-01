@@ -34,6 +34,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * Generate Installable Zip file for Module
  *
+ * @template-extends AbstractExternalTask<Formater>
+ *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class ModuleBuilder extends AbstractExternalTask

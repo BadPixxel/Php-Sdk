@@ -35,6 +35,8 @@ use Symfony\Component\Yaml\Yaml;
  *
  * Generate Static Documentation Website for Github|Gitlab Pages
  *
+ * @template-extends AbstractExternalTask<Formater>
+ *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class DocumentationBuilder extends AbstractExternalTask
