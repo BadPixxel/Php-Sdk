@@ -20,8 +20,7 @@ set -e
 
 ################################################################################
 # Docker Compose Container you want to check
-CONTAINERS="php-8.3,php-8.2,php-8.1"
-#CONTAINERS="php-8.4,php-8.3,php-8.2,php-8.1"
+CONTAINERS="php-8.4,php-8.3,php-8.2,php-8.1"
 
 ################################################################################
 # Start Docker Compose Stack

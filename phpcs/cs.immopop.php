@@ -16,7 +16,7 @@ global $config, $finder;
 include_once "headers/immopop.php";
 
 /** @var string $pwd */
-$pwd = $_SERVER['PWD'];
+$pwd = $_SERVER['PWD'] ?? "./";
 
 $finder = PhpCsFixer\Finder::create()
     ->in($pwd)
