@@ -14,8 +14,9 @@
 includes:
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-    inferPrivatePropertyTypeFromConstructor: true 
+    inferPrivatePropertyTypeFromConstructor: true
     universalObjectCratesClasses:
             - ArrayObject
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics

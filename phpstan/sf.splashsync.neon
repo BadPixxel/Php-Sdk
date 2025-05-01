@@ -27,6 +27,7 @@ parameters:
         - ArrayObject
     ignoreErrors:
         - identifier: missingType.iterableValue
+        - identifier: missingType.generics
         - "#Casting to string something that's already string.#"
     symfony:
         container_xml_path: %currentWorkingDirectory%/var/cache/dev/testContainer.xml # or srcDevDebugProjectContainer.xml for Symfony 4+
