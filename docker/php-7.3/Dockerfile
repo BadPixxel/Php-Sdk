@@ -45,6 +45,7 @@ RUN pecl install mongodb-1.16.2 \
 ################################################################
 
 RUN echo "memory_limit=3G" >> /usr/local/etc/php/conf.d/memory.ini
+RUN echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/acpu.ini
 
 ################################################################
 # Install Composer
