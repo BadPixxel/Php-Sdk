@@ -34,7 +34,7 @@ module:
         # Build Module
         - php vendor/bin/grumphp run --tasks=build-module
     ################################################################################
-    # Job Artefacts
+    # Job Artifacts
     artifacts:
         when: always
         paths:

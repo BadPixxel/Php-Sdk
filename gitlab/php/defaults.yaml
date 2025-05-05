@@ -52,7 +52,7 @@ stages:
     after_script:
         ################################################################################
         # Run After Script
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/2.0/ci/after.sh | sh
 
 ################################################################
 # Quality Tests

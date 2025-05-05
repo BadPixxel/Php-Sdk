@@ -34,7 +34,7 @@ manifests:
         # Generate Splash Manifests
         - php bin/console splash:server:manifest
     ################################################################################
-    # Job Artefacts
+    # Job Artifacts
     artifacts:
         when: always
         paths:
