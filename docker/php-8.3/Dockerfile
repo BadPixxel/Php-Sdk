@@ -54,7 +54,7 @@ RUN echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/acpu.ini
 # + Install Composer
 ################################################################
 
-RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/main/bin/wall-e.phar?raw=true', '/usr/local/bin/wall-e');" \
+RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/2.0/bin/wall-e.phar?raw=true', '/usr/local/bin/wall-e');" \
     && chmod +x /usr/local/bin/wall-e \
     && wall-e add:composer
 
