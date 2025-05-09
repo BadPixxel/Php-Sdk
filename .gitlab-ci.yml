@@ -135,6 +135,10 @@ pages:
     # Run Test Script
     script:
         - wget -qO - https://gitlab.com/badpixxel-robo/jekyll/-/raw/2.0/scripts/gitlab-pages.sh | sh
+    ################################################################################
+    # Only on Default Branch
+    rules:
+        - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
     artifacts:
         paths:
           - public
