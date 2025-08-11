@@ -80,14 +80,14 @@ tests:php-8.1:
     - docker pull $IMAGE_TAG || true
     ################################################################
     # Build & Upload Splash All Docker Images
-    - docker build -t $IMAGE_TAG docker/$CI_JOB_NAME --cache-from $IMAGE_TAG
+    - docker build -t $IMAGE_TAG docker/$CI_JOB_NAME -build-arg BUILDKIT_INLINE_CACHE=1 --cache-from $IMAGE_TAG
     - docker push $IMAGE_TAG
     ################################################################
     # Connect Docker to DockerHub
     - docker login -u splashsync -p $DOCKER_HUB_TOKEN
     ################################################################
     # Build & Upload Splash All Docker Hub Images
-    - docker build -t splashsync/php-sdk:$CI_JOB_NAME docker/$CI_JOB_NAME --cache-from $IMAGE_TAG
+    - docker build -t splashsync/php-sdk:$CI_JOB_NAME docker/$CI_JOB_NAME -build-arg BUILDKIT_INLINE_CACHE=1 --cache-from $IMAGE_TAG
     - docker push splashsync/php-sdk:$CI_JOB_NAME
   except:
     - schedules
