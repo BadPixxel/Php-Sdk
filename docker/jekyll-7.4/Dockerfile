@@ -13,21 +13,34 @@ RUN apt-get update \
 # Install PHP Extensions
 ################################################################
 
-# Zip | Xml | Soap | Bcmath
-# Apcu | Mongodb | Gd | Imagick
-RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmagickwand-dev libxslt-dev \
-    && pecl install apcu mongodb imagick \
-    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif xsl sockets \
+################################################################
+# Zip | Xml | Soap | Bcmath | Apcu | Gd
+RUN apt-get update && apt-get install --no-install-recommends -y zlib1g-dev libzip-dev libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libssl-dev libxslt-dev \
+    && pecl install apcu \
+    && docker-php-ext-install zip xml soap bcmath pdo_mysql pcntl intl exif xsl sockets ftp \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable apcu \
-    && docker-php-ext-enable mongodb \
-    && docker-php-ext-enable imagick \
     && docker-php-source delete \
     && pecl clear-cache \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+################################################################
+# Imagick
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+    && printf "\n" | pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && docker-php-source delete \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+################################################################
+# Mongodb
+RUN pecl install mongodb-1.20.1 \
+    && docker-php-ext-enable mongodb \
+    && docker-php-source delete \
+    && pecl clear-cache \
 
 ################################################################
 # Configure Php
