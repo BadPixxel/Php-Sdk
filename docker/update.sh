@@ -44,9 +44,7 @@ docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4          
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4-apache   docker/php-8.4-apache   --push
 
 echo "[JEKYLL] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll docker/jekyll
-docker push registry.gitlab.com/badpixxel-projects/php-sdk:jekyll
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll docker/jekyll                     --push
 
 echo "[JEKYLL PHP 7.4] Build & Upload Docker Image"
-docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll-7.4 docker/jekyll-7.4
-docker push registry.gitlab.com/badpixxel-projects/php-sdk:jekyll-7.4
+docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:jekyll-7.4 docker/jekyll-7.4             --push
