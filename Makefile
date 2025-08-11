@@ -28,6 +28,10 @@ verify:	# Verify Code in All Containers
 phpstan:	# Execute Php Stan in All Containers
 	$(MAKE) all COMMAND="php vendor/bin/grumphp run --testsuite=phpstan"
 
+.PHONY: docker
+docker:		# Compile & Push All Docker Containers
+	bash docker/update.sh
+
 .PHONY: all
 all: # Execute a Command in All Containers
 	@$(foreach service,$(shell docker compose config --services), \
