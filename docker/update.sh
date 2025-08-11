@@ -30,7 +30,6 @@ docker push registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
 
 echo "[PHP 8.1] Build & Upload Docker Image"
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1          docker/php-8.1          --push
-docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1-apache   docker/php-8.1-apache   --push
 
 echo "[PHP 8.2] Build & Upload Docker Image"
 docker build -t registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2          docker/php-8.2          --push
