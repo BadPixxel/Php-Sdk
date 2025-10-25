@@ -13,7 +13,7 @@ FROM --platform=$BUILDPLATFORM dunglas/frankenphp:php${PHP_VERSION}-alpine
 # Install Varions Tools
 ################################################################
 
-RUN apk add --no-cache bash git curl wget iputils busybox-extras openssh unzip rdiff-backup
+RUN apk add --no-cache bash git make curl wget iputils busybox-extras openssh unzip rdiff-backup
 
 ################################################################
 # Install PHP Extensions
