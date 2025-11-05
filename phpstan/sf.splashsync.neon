@@ -16,18 +16,11 @@ includes:
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-phpunit/extension.neon
 	- %currentWorkingDirectory%/vendor/phpstan/phpstan-doctrine/extension.neon
 parameters:
-    scanDirectories:
-        # This fixes the Autoloading Errors with Test Case Overrides for Connectors
-        - "%currentWorkingDirectory%/vendor/splash/php-bundle/phpunit/Tools/"
-    bootstrapFiles:
-        - "%currentWorkingDirectory%/vendor/splash/phpcore/inc/Splash.Inc.php"
-        - "%currentWorkingDirectory%/vendor/splash/phpcore/inc/defines.inc.php"
     inferPrivatePropertyTypeFromConstructor: true
     universalObjectCratesClasses:
         - ArrayObject
     ignoreErrors:
         - identifier: missingType.iterableValue
         - identifier: missingType.generics
-        - "#Casting to string something that's already string.#"
     symfony:
-        containerXmlPath: %currentWorkingDirectory%/var/cache/dev/testContainer.xml
+        consoleApplicationLoader: %currentWorkingDirectory%/bin/console
