@@ -23,6 +23,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
     ->exclude('tests/Fixtures')
     ->exclude('var')
+    ->notPath('config/reference.php')
 ;
 
 include_once "cs.rules.php";
