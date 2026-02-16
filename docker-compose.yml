@@ -19,6 +19,19 @@
 services:
 
     ################################################################################
+    # PHP 8.5
+    php-8.5:
+        build:
+            context: ./docker/php-8.5
+        container_name: php85.badpixxel.sdk.local
+        volumes:
+            - ./:/src
+            - vendor-php85:/var/www/html/vendor
+        environment:
+            SERVER_ROOT: /src/public
+            PHP_CS_FIXER_IGNORE_ENV: 1
+
+    ################################################################################
     # PHP 8.4
     php-8.4:
         build:
@@ -106,6 +119,7 @@ services:
             - vendor-php72:/var/www/html/vendor
 
 volumes:
+    vendor-php85: ~
     vendor-php84: ~
     vendor-php83: ~
     vendor-php82: ~

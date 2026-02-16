@@ -38,6 +38,12 @@ stages:
         # Run After Script
         - cat ci/after.sh | sh
 
+tests:php-8.5:
+    image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.5
+    <<: *core_tests
+    variables:
+        PHP_CS_FIXER_IGNORE_ENV: 1
+
 tests:php-8.4:
     image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.4
     <<: *core_tests
