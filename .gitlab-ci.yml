@@ -135,6 +135,9 @@ php-8.4:
 php-8.4-apache:
   <<: *docker
 
+php-8.5:
+  <<: *docker
+
 jekyll:
     <<: *docker
 
