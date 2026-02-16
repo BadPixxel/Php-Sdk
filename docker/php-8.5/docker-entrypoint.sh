@@ -9,7 +9,12 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 ################################################################
-# Otherwise (CI/CD), start FrankenPHP in background then exec command
+# CI/CD mode: ensure SERVER_ROOT exists and start FrankenPHP in background
+if [ -n "$SERVER_ROOT" ] && [ ! -d "$SERVER_ROOT" ]; then
+    mkdir -p "$SERVER_ROOT"
+    echo "<html><body><h1>FrankenPHP Ready</h1></body></html>" > "$SERVER_ROOT/index.html"
+fi
+
 frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile &
 sleep 2
 
