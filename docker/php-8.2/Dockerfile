@@ -27,7 +27,7 @@ RUN install-php-extensions @composer pdo_mysql pdo_sqlite mongodb
 ################################################################################
 # Configure Caddy Webserver
 ENV CADDY_GLOBAL_OPTIONS="auto_https disable_redirects"
-ARG SERVER_ROOT=/var/www/html
+ENV SERVER_ROOT=/var/www/html
 ENV SERVER_NAME=":80"
 
 ################################################################
