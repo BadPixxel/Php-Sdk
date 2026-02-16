@@ -62,7 +62,7 @@ tests:php-8.1:
 ################################################################
 .docker:        &docker
   stage:        Docker
-  image:        docker:stable
+  image:        docker:latest
   tags:         [ Dedicated-Docker ]
   services:
     - docker:dind
