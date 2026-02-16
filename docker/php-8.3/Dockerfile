@@ -47,3 +47,13 @@ RUN php -r "copy('https://github.com/BadPixxel/Php-Robo/blob/2.0/bin/wall-e.phar
 RUN php -m
 
 WORKDIR /var/www/html
+
+################################################################
+# Custom Entrypoint
+# - Args starting with "-" (default CMD) => FrankenPHP foreground (docker compose)
+# - Other commands (CI/CD shell) => FrankenPHP background + exec command
+################################################################
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["--config", "/etc/frankenphp/Caddyfile", "--adapter", "caddyfile"]
