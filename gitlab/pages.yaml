@@ -23,7 +23,7 @@
 # Build Documentation
 ################################################################
 pages:
-    image:      jekyll/jekyll:latest
+    image:      jekyll/jekyll:4.2.2
     stage:      Builds
     tags:       [ Dedicated ]
     ################################################################################
