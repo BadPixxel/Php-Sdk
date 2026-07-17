@@ -73,10 +73,12 @@ tests:php-8.1:
 ################################################################
 .docker:        &docker
   stage:        Docker
-  image:        docker:latest
+  # Docker pinned to v27: runc >= 1.3.3 shipped with docker:latest fails on
+  # kernel 5.4 runners (tmpfs mask mount options rejected with EINVAL)
+  image:        docker:27
   tags:         [ Dedicated-Docker ]
   services:
-    - docker:dind
+    - docker:27-dind
   variables:
     IMAGE_TAG: "$CI_REGISTRY_IMAGE:$CI_JOB_NAME"
   before_script:
