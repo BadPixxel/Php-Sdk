@@ -48,9 +48,6 @@ class Composer
             // Add .htaccess to Build directory
             $htaccessContent = file_get_contents(dirname(__DIR__)."/Resources/build/.htaccess");
             $app = $composer->getComposer();
-            if (is_null($app)) {
-                throw new Exception('Could not connect to Composer');
-            }
             /** @var string $vendorPath */
             $vendorPath = $app->getConfig()->get("vendor-dir");
             $htaccessPath = $vendorPath.DIRECTORY_SEPARATOR.'.htaccess';
