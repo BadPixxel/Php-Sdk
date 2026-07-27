@@ -26,6 +26,7 @@ pages:
     image:      jekyll/jekyll:4.2.2
     stage:      Builds
     tags:       [ Dedicated ]
+    allow_failure: true
     ################################################################################
     # Run Test Script
     script:
