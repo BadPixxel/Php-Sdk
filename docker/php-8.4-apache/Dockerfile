@@ -43,6 +43,13 @@ RUN pecl install mongodb \
     && pecl clear-cache
 
 ################################################################
+# Redis
+RUN pecl install redis \
+    && docker-php-ext-enable redis \
+    && docker-php-source delete \
+    && pecl clear-cache
+
+################################################################
 # Configure Php
 ################################################################
 

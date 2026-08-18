@@ -22,7 +22,7 @@ RUN apk add --no-cache bash git make curl wget iputils busybox-extras openssh un
 #################################################################################
 ## Install Php Extensions
 RUN install-php-extensions intl zip soap opcache apcu xml bcmath pcntl exif xsl sockets ftp gd imagick
-RUN install-php-extensions @composer pdo_mysql pdo_sqlite mongodb
+RUN install-php-extensions @composer pdo_mysql pdo_sqlite mongodb redis
 
 ################################################################################
 # Configure Caddy Webserver
