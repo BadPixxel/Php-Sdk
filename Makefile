@@ -4,6 +4,9 @@
 
 include make/sdk.mk
 
+# Third-party assets excluded from project statistics
+STATS_EXCLUDE := jekyll/assets/plugins
+
 COMMAND ?= echo "Aucune commande spécifiée"
 COLOR_CYAN := $(shell tput setaf 6)
 COLOR_RESET := $(shell tput sgr0)

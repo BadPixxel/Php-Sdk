@@ -70,6 +70,7 @@ Available targets:
 | `make style`    | Run all style checks (cs, csfixer, md, cpd)              |
 | `make stan`     | Run PHPStan                                              |
 | `make quality`  | Run `lint` + `style` + `stan` in a row                   |
+| `make stats`    | Project report: sources by type, git, outdated packages, security |
 | `make up/stop`  | Start/stop the project's Docker containers               |
 | `make cc`       | Clear the Symfony cache on every container               |
 
