@@ -42,6 +42,8 @@ stages:
     after_script:
         # Run After Script
         - cat ci/after.sh | sh
+        # Project Statistics Report
+        - make stats
 
 tests:php-8.5:
     image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.5

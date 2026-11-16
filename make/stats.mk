@@ -18,19 +18,25 @@ STATS_EXCLUDE ?=
 define _STATS_SH
 set -u
 TOP="${STATS_TOP:-5}"
-WIDTH=68
+WIDTH=72
 
 #====================================================================#
 # Colors (disabled on NO_COLOR, enabled on terminals & CI)
+# Grey uses code 90: "dim" (code 2) is not rendered by GitLab job logs
 if [ -z "${NO_COLOR:-}" ] && { [ -t 1 ] || [ -n "${CI:-}" ]; }; then
     E=$(printf '\033')
-    B="$E[1m"; D="$E[2m"; R="$E[0m"; CY="$E[36m"; GR="$E[32m"; YE="$E[33m"; RE="$E[31m"; MA="$E[35m"
+    B="$E[1m"; D="$E[90m"; R="$E[0m"; CY="$E[36m"; GR="$E[32m"; YE="$E[33m"; RE="$E[31m"; MA="$E[35m"
 else
     B=""; D=""; R=""; CY=""; GR=""; YE=""; RE=""; MA=""
 fi
 
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT INT TERM
+
+#====================================================================#
+# Report is buffered: on GitLab CI it is wrapped in a collapsible section,
+# expanded only when a security issue is found
+exec 3>&1 > "$TMP/report"
 
 #====================================================================#
 # Layout helpers
@@ -61,7 +67,7 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         INFO="$INFO $D·$R $COMMITS commits $D·$R $AUTHORS contributors"
     fi
     DIRTY=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
-    [ "$DIRTY" -gt 0 ] && INFO="$INFO $D·$R $YE$DIRTY uncommitted$R"
+    [ -z "${CI:-}" ] && [ "$DIRTY" -gt 0 ] && INFO="$INFO $D·$R $YE$DIRTY uncommitted$R"
     row "$INFO"
     git ls-files -z --cached --others --exclude-standard > "$TMP/all" 2>/dev/null
 else
@@ -99,26 +105,52 @@ function lang(path,    base, ext) {
 tr '\0' '\n' < "$TMP/all" | awk -v excl="${STATS_EXCLUDE:-}" "$LANG_AWK"'
     (excl == "" || $0 !~ excl) && lang($0) != ""
 ' > "$TMP/files"
-tr '\n' '\0' < "$TMP/files" | xargs -0 awk '
-    FNR == 1 && NR > 1 { print n "\t" f }
-    FNR == 1 { f = FILENAME; n = 0 }
-    { n++ }
-    END { if (NR) print n "\t" f }
+#====================================================================#
+# Per file: total lines, comment lines, blank lines (line based heuristic)
+tr '\n' '\0' < "$TMP/files" | xargs -0 awk "$LANG_AWK"'
+    function flush() { if (f != "") print n "\t" c "\t" b "\t" f }
+    function starts(str) { return substr(s, 1, length(str)) == str }
+    function block(start, stop) { c++; if (!index(substr(s, length(start) + 1), stop)) blk = stop }
+    FNR == 1 {
+        flush(); f = FILENAME; l = lang(f); n = c = b = 0; blk = ""
+        cstyle = (l ~ /^(PHP|JavaScript|TypeScript|Vue|Styles|SQL)$/)
+        hash = (l ~ /^(PHP|Shell|Docker|Make|YAML|Python|Config)$/)
+        html = (l ~ /^(HTML|XML|Vue|Twig)$/)
+    }
+    {
+        n++; s = $0; gsub(/^[ \t]+|[ \t]+$/, "", s)
+        if (s == "") { b++; next }
+        if (blk != "") { c++; if (index(s, blk)) blk = ""; next }
+        if (cstyle && starts("/*")) { block("/*", "*/"); next }
+        if (cstyle && starts("//")) { c++; next }
+        if (hash && starts("#") && !starts("#[")) { c++; next }
+        if (html && starts("<!--")) { block("<!--", "-->"); next }
+        if (l == "Twig" && starts("{#")) { block("{#", "#}"); next }
+        if ((l == "SQL" && starts("--")) || (l == "Config" && starts(";"))) { c++; next }
+    }
+    END { flush() }
 ' 2>/dev/null > "$TMP/sizes"
 
 section "Sources"
-awk -F '\t' -v cy="$CY" -v dim="$D" -v rst="$R" -v bold="$B" "$LANG_AWK"'
+awk -F '\t' -v cy="$CY" -v dim="$D" -v rst="$R" -v bold="$B" -v tmp="$TMP" "$LANG_AWK"'
     function fmt(n,    s) { s = sprintf("%d", n); while (s ~ /[0-9][0-9][0-9][0-9]/) sub(/[0-9][0-9][0-9]($| )/, " &", s); return s }
-    { l = lang($2); files[l]++; lines[l] += $1; total += $1; count++ }
+    function ratio(com, code) { return (code > 0) ? sprintf("%3d%%", 100 * com / code) : "   -" }
+    {
+        l = lang($4); files[l]++; lines[l] += $1; total += $1; count++
+        if (l !~ /^(JSON|Docs)$/) { com[l] += $2; code[l] += $1 - $3; allcom += $2; allcode += $1 - $3 }
+    }
     END {
-        for (l in lines) printf "%d\t%s\t%d\n", lines[l], l, files[l] | "sort -rn > \"'"$TMP"'/langs\""
-        close("sort -rn > \"'"$TMP"'/langs\"")
-        while ((getline row < "'"$TMP"'/langs") > 0) {
+        sorter = "sort -rn > \"" tmp "/langs\""
+        for (l in lines) printf "%d\t%s\t%d\n", lines[l], l, files[l] | sorter
+        close(sorter)
+        printf "%s%-11s %6s %9s %9s   %-20s %5s%s\n", dim, "Type", "files", "lines", "comments", "share", "", rst
+        while ((getline row < (tmp "/langs")) > 0) {
             split(row, c, "\t"); pct = total ? 100 * c[1] / total : 0
             full = int(pct / 5 + 0.5); bar = cy; for (i = 0; i < 20; i++) bar = bar (i == full ? dim : "") (i < full ? "█" : "░")
-            printf "%-11s %6s files %9s lines  %s%s %3d%%\n", c[2], fmt(c[3]), fmt(c[1]), bar, rst, pct
+            printf "%-11s %6s %9s %9s   %s%s %3d%%\n", c[2], fmt(c[3]), fmt(c[1]), ratio(com[c[2]], code[c[2]]), bar, rst, pct
         }
-        printf "%s%-11s %6s files %9s lines%s\n", bold, "Total", fmt(count), fmt(total), rst
+        printf "%s%-11s %6s %9s %9s%s\n", bold, "Total", fmt(count), fmt(total), ratio(allcom, allcode), rst
+        printf "%s files · %s lines", fmt(count), fmt(total) > (tmp "/summary.sources")
     }' "$TMP/sizes" > "$TMP/langs.out"
 while IFS= read -r LINE; do row "$LINE"; done < "$TMP/langs.out"
 MARKS=$(tr '\n' '\0' < "$TMP/files" | xargs -0 grep -hE 'TO''DO|FIX''ME' 2>/dev/null | wc -l | tr -d ' ')
@@ -127,7 +159,7 @@ MARKS=$(tr '\n' '\0' < "$TMP/files" | xargs -0 grep -hE 'TO''DO|FIX''ME' 2>/dev/
 #====================================================================#
 # Largest code files (data & docs excluded)
 section "Largest files"
-awk -F '\t' "$LANG_AWK"' lang($2) !~ /^(JSON|YAML|XML|Docs)$/' "$TMP/sizes" | sort -rn | head -n "$TOP" \
+awk -F '\t' "$LANG_AWK"' lang($4) !~ /^(JSON|YAML|XML|Docs)$/ { print $1 "\t" $4 }' "$TMP/sizes" | sort -rn | head -n "$TOP" \
     | while IFS="$(printf '\t')" read -r N F; do row "$(printf '%6s' "$N")  $D$F$R"; done
 
 #====================================================================#
@@ -155,7 +187,7 @@ if [ -f composer.json ] && command -v composer >/dev/null 2>&1 && [ "${STATS_SKI
     composer outdated --direct --format=json --no-interaction --no-ansi > "$TMP/outdated" 2>/dev/null
     composer audit --format=json --abandoned=report --no-interaction --no-ansi > "$TMP/audit" 2>/dev/null
     DIRECT=$(composer show --direct --name-only --no-interaction --no-ansi 2>/dev/null | grep -c /)
-    awk -v top="$TOP" -v red="$RE" -v yel="$YE" -v dim="$D" -v rst="$R" -v grn="$GR" -v direct="$DIRECT" '
+    awk -v tmp="$TMP" -v top="$TOP" -v red="$RE" -v yel="$YE" -v dim="$D" -v rst="$R" -v grn="$GR" -v direct="$DIRECT" '
         function value(line) { sub(/^[^:]*: *"?/, "", line); sub(/"?,? *$/, "", line); return line }
         /"name":/ { name = value($0) }
         /"version":/ { ver = value($0) }
@@ -169,6 +201,7 @@ if [ -f composer.json ] && command -v composer >/dev/null 2>&1 && [ "${STATS_SKI
             rank[n] = (level == "major") ? 0 : 1
         }
         END {
+            printf "%s", n ? n " outdated" : "up to date" > (tmp "/summary.composer")
             if (!n) { printf "%d direct · %s✔ all up to date%s\n", direct, grn, rst; exit }
             printf "%d direct · %d outdated %s(%d major, %d minor/patch)%s\n", direct, n, dim, count["major"], count["minor"], rst
             shown = 0
@@ -176,7 +209,7 @@ if [ -f composer.json ] && command -v composer >/dev/null 2>&1 && [ "${STATS_SKI
             if (n > shown) printf "%s… and %d more%s\n", dim, n - shown, rst
         }
     ' "$TMP/outdated" | while IFS= read -r LINE; do row "$LINE"; done
-    awk -v red="$RE" -v yel="$YE" -v dim="$D" -v rst="$R" -v grn="$GR" -v bold="$B" '
+    awk -v tmp="$TMP" -v red="$RE" -v yel="$YE" -v dim="$D" -v rst="$R" -v grn="$GR" -v bold="$B" '
         function value(line) { sub(/^[^:]*: *"?/, "", line); sub(/"?,? *$/, "", line); return line }
         function flush(    color, label) {
             if (pkg != "") {
@@ -197,6 +230,7 @@ if [ -f composer.json ] && command -v composer >/dev/null 2>&1 && [ "${STATS_SKI
         inab && /":/ { split($0, p, "\""); repl = value($0); ab[++b] = sprintf("%s✘%s %s%s%s %s%s%s", yel, rst, bold, p[2], rst, dim, repl == "null" ? "no replacement" : "→ " repl, rst) }
         END {
             flush()
+            printf "%d", a + b > (tmp "/problems")
             if (a) { print "Security   " a " advisories"; for (i = 1; i <= a; i++) print "           " adv[i] }
             else print "Security   " grn "✔ no known vulnerability" rst
             if (b) { print "Abandoned  " b " packages"; for (i = 1; i <= b; i++) print "           " ab[i] }
@@ -206,6 +240,25 @@ if [ -f composer.json ] && command -v composer >/dev/null 2>&1 && [ "${STATS_SKI
 fi
 
 footer
+
+#====================================================================#
+# Output: plain, or GitLab collapsible section with a one line summary
+exec 1>&3 3>&-
+if [ -n "${GITLAB_CI:-}" ]; then
+    PROBLEMS=$(cat "$TMP/problems" 2>/dev/null || echo 0)
+    SUMMARY="Project Stats · $NAME · $(cat "$TMP/summary.sources" 2>/dev/null)"
+    [ -f "$TMP/summary.composer" ] && SUMMARY="$SUMMARY · $(cat "$TMP/summary.composer")"
+    if [ "$PROBLEMS" -gt 0 ]; then
+        COLLAPSED=false; SUMMARY="$SUMMARY · $RE⚠ $PROBLEMS security issue(s)$R"
+    else
+        COLLAPSED=true; [ -f "$TMP/problems" ] && SUMMARY="$SUMMARY · $GR✔ secure$R"
+    fi
+    printf '\033[0Ksection_start:%s:project_stats[collapsed=%s]\r\033[0K%s\n' "$(date +%s)" "$COLLAPSED" "$B$CY$SUMMARY$R"
+    cat "$TMP/report"
+    printf '\033[0Ksection_end:%s:project_stats\r\033[0K\n' "$(date +%s)"
+else
+    cat "$TMP/report"
+fi
 endef
 
 stats: export STATS_SH := $(value _STATS_SH)

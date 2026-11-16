@@ -11,7 +11,7 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
 ################################################################
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y git curl wget default-mysql-client  apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup \
+    && apt-get install --no-install-recommends -y git curl make wget default-mysql-client  apt-utils iputils-ping systemd gnupg2 unzip ssh rdiff-backup \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

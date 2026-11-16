@@ -8,8 +8,8 @@ include make/sdk.mk
 STATS_EXCLUDE := jekyll/assets/plugins
 
 COMMAND ?= echo "Aucune commande spécifiée"
-COLOR_CYAN := $(shell tput setaf 6)
-COLOR_RESET := $(shell tput sgr0)
+COLOR_CYAN := $(shell tput setaf 6 2>/dev/null)
+COLOR_RESET := $(shell tput sgr0 2>/dev/null)
 
 start: 	## Execute Functional Test
 	symfony serve --no-tls
