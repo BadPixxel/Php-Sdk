@@ -1,6 +1,12 @@
 FROM php:8.0-apache
 
 ################################################################
+# Update sources.list to use archive repositories for Bullseye
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+    && sed -i '/bullseye-updates/d' /etc/apt/sources.list
+
+################################################################
 # Install Varions Tools
 ################################################################
 
